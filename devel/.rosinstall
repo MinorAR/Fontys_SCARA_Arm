@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/jeroen/Software/scara_arm_ws/devel/setup.sh
