@@ -1,2 +1,2 @@
-# Fontys_SCARA_Arm
-Welcome to the fontys scara arm project!
+# Fontys SCARA Arm project
+# More information on [Wiki](https://github.com/MinorAR/Fontys_SCARA_Arm/wiki)
