@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="test_setup1">
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+	<link name="base_link"/>
+	
+	<link name="frame">
+		<visual>
+			<geometry>
+				<cylinder length="0.050" radius="0.150"/>
+			</geometry>
+			<origin xyz="0 0 0.025" rpy="0 0 0"/>
+			<material name="steel">
+				<color rgba="0.3 0.3 0.9 1"/>
+			</material>
+		</visual>
+		<collision>
+			<geometry>
+				<cylinder length="0.050" radius="0.155"/>
+			</geometry>
+			<origin xyz="0 0 0.025" rpy="0 0 0"/>
+		</collision>
+	</link>
+	
+	<link name="dummy"/>
+	
+	<joint name="base_link_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="frame"/>
+	</joint>
+	
+	<joint name="base_joint" type="revolute">
+			<parent link="frame"/>
+			<child link="dummy"/>
+			<origin xyz="0 0 0.025" rpy="0 -${M_PI/2.0} 0" />
+			<axis xyz="1 0 0" />
+			<limit effort="1000.0" lower="-${M_PI/2.0}" upper="${M_PI/2.0}" velocity="0.5"/>
+		</joint>
+
+	<xacro:include filename="scara.urdf.xacro" />
+	
+	<create />
+	
+	<scara_arm  parent="dummy"/>
+</robot>

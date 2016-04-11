@@ -1,0 +1,9 @@
+controller_list:
+  - name: fake_Total_controller
+    joints:
+      - shoulder
+      - elbow
+      - wrist
+      - effector_joint_1
+      - effector_joint_2
+      - effector_joint_3

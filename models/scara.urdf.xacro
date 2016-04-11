@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scara_arm">
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+	<xacro:property name="base_length" value="0.115" />
+	<xacro:property name="base_radius" value="0.095" />
+	<xacro:property name="arm_length" value="0.425" />
+	<xacro:property name="arm_radius" value="0.015" />
+	<xacro:property name="fore_arm_length" value="0.350" />
+	<xacro:property name="fore_arm_radius" value="0.015" />
+	<xacro:property name="effector_length" value="0.115" />
+	<xacro:property name="effector_radius" value="0.014" />
+	<xacro:property name="joint_offset" value="0.050" />
+	<xacro:property name="collision_offset" value="0.005" />
+	
+	<xacro:macro name="scara_arm" params="parent">	
+		<link name="base">
+			<visual>
+				<geometry>
+					<cylinder length="${base_length}" radius="${base_radius}"/>
+				</geometry>
+				<origin xyz="${base_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+				<material name="aluminium">
+					<color rgba="0.9 0.9 0.9 1"/>
+				</material>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="${base_length/2.0}" radius="${base_radius + collision_offset}"/>
+				</geometry>
+				<origin xyz="${base_length} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+			</collision>
+		</link>
+	
+		<link name="arm">
+			<visual>
+				<geometry>
+					<cylinder length="${arm_length}" radius="${arm_radius}"/>
+				</geometry>
+				<origin xyz="${arm_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+				<material name="carbon">
+					<color rgba="0.1 0.1 0.1 1"/>
+				</material>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="${arm_length}" radius="${arm_radius + collision_offset}"/>
+				</geometry>
+				<origin xyz="${arm_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+			</collision>
+		</link>
+	
+		<link name="fore_arm">
+		<visual>
+				<geometry>
+					<cylinder length="${fore_arm_length}" radius="${fore_arm_radius}"/>
+				</geometry>
+				<origin xyz="${fore_arm_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+				<material name="carbon"/>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="${fore_arm_length}" radius="${fore_arm_radius + collision_offset}"/>
+				</geometry>
+				<origin xyz="${fore_arm_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+			</collision>
+		</link>
+	
+		<link name="effector">
+			<visual>
+				<geometry>
+					<cylinder length="${effector_length}" radius="${effector_radius}"/>
+				</geometry>
+				<origin xyz="${effector_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+				<material name="aluminium"/>
+			</visual>
+			<collision>
+				<geometry>
+					<cylinder length="${effector_length}" radius="${effector_radius + collision_offset}"/>
+				</geometry>
+				<origin xyz="${effector_length/2.0} 0 0" rpy="0 ${M_PI/2.0} 0"/>
+			</collision>
+		</link>
+	
+		<link name="tool0"/>
+	
+		<joint name="mounting" type="fixed">
+			<parent link="${parent}"/>
+			<child link="base"/>
+		</joint>
+	
+		<joint name="shoulder" type="revolute">
+			<parent link="base"/>
+			<child link="arm"/>
+			<origin xyz="${base_length} 0 ${joint_offset}" rpy="0 0 0" />
+			<axis xyz="0 0 1" />
+			<limit effort="1000.0" lower="-${M_PI*(3.0/4.0)}" upper="${M_PI*(3.0/4.0)}" velocity="0.5"/>
+		</joint>
+	
+		<joint name="elbow" type="revolute">
+			<parent link="arm"/>
+			<child link="fore_arm"/>
+			<origin xyz="${arm_length} 0 ${joint_offset}" rpy="0 0 0" />
+			<axis xyz="0 0 1" />
+			<limit effort="1000.0" lower="-2.98" upper="2.98" velocity="0.5"/>
+		</joint>
+	
+		<joint name="wrist" type="revolute">
+			<parent link="fore_arm"/>
+			<child link="effector"/>
+			<origin xyz="${fore_arm_length} 0 -${joint_offset}" rpy="0 0 0" />
+			<axis xyz="0 0 1" />
+			<limit effort="1000.0" lower="-2.98" upper="2.98" velocity="0.5"/>
+		</joint>
+	
+		<joint name="joint_tool" type="fixed">
+			<parent link="effector"/>
+			<child link="tool0"/>
+			<origin xyz="${effector_length} 0 0" rpy="0 0 0" />
+		</joint>
+	</xacro:macro>
+</robot>

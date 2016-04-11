@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/jeroen/Software/test_scara/test_setup3.urdf
+  SRDF:
+    relative_path: config/test_setup1.srdf
+  CONFIG:
+    generated_timestamp: 1460371491
