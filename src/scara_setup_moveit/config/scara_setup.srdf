@@ -28,7 +28,7 @@
     <group_state name="StretchedTop" group="FullArm">
         <joint name="Elbow" value="0" />
         <joint name="FingerJoint" value="0" />
-        <joint name="Linear" value="0,4" />
+        <joint name="Linear" value="0.4" />
         <joint name="Shoulder" value="0" />
         <joint name="Wrist" value="0" />
     </group_state>
