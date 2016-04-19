@@ -1,0 +1,25 @@
+scara_setup:
+ joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+ Linear_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: Linear
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+ Shoulder_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: Shoulder
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+ Elbow_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: Elbow
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+ Wrist_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: Wrist
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+ FingerJoint_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: FingerJoint
+  pid: {p: 100.0, i: 0.01, d: 10.0}

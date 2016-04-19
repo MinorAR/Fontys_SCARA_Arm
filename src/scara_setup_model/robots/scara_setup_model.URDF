@@ -1,0 +1,394 @@
+<robot
+  name="scara_setup">
+  <link
+    name="frame">
+    <inertial>
+      <origin
+        xyz="1.3844408662302E-17 0.00321259358385474 0.261"
+        rpy="0 0 0" />
+      <mass
+        value="1.493046" />
+      <inertia
+        ixx="0.0358036406167454"
+        ixy="5.47977803491302E-19"
+        ixz="2.27329839952438E-18"
+        iyy="0.0363239091207001"
+        iyz="5.42060051450622E-18"
+        izz="0.000727504353445348" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.101960784313725 0.101960784313725 0.101960784313725 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Cart">
+    <inertial>
+      <origin
+        xyz="7.5418545308525E-16 0.0316476937505298 -0.0055045146502736"
+        rpy="0 0 0" />
+      <mass
+        value="0.571810586822584" />
+      <inertia
+        ixx="0.0012650642271779"
+        ixy="-2.79830099705637E-19"
+        ixz="3.17194898729487E-20"
+        iyy="0.00043905267530355"
+        iyz="-9.10320245977086E-05"
+        izz="0.00106491934489785" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Cart.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Cart.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Linear"
+    type="prismatic">
+    <origin
+      xyz="0 -0.0185 0.049"
+      rpy="3.1416 0 0" />
+    <parent
+      link="frame" />
+    <child
+      link="Cart" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="0"
+      upper="0.4"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Arm">
+    <inertial>
+      <origin
+        xyz="-0.175 -0.0203005702056909 4.67062637625889E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.313727406555667" />
+      <inertia
+        ixx="7.33963970221476E-05"
+        ixy="3.72694496791892E-20"
+        ixz="1.71820782957866E-19"
+        iyy="0.0068480445038199"
+        iyz="-1.28131378462755E-21"
+        izz="0.006840237379281" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Arm.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Arm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Shoulder"
+    type="revolute">
+    <origin
+      xyz="0 0.094508 0.0285"
+      rpy="-1.5708 0 -1.5708" />
+    <parent
+      link="Cart" />
+    <child
+      link="Arm" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="ForeArm">
+    <inertial>
+      <origin
+        xyz="0.016044 0.14438 -0.031349"
+        rpy="0 0 0" />
+      <mass
+        value="0.46163" />
+      <inertia
+        ixx="0.01102"
+        ixy="-0.0001634"
+        ixz="-5.2062E-05"
+        iyy="0.00025416"
+        iyz="0.00031928"
+        izz="0.010944" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/ForeArm.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/ForeArm.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Elbow"
+    type="revolute">
+    <origin
+      xyz="-0.35 0 0"
+      rpy="7.3171E-17 -1.0978 1.5708" />
+    <parent
+      link="Arm" />
+    <child
+      link="ForeArm" />
+    <axis
+      xyz="-0.45558 0 0.8902" />
+    <limit
+      lower="-2.36"
+      upper="2.36"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Hand">
+    <inertial>
+      <origin
+        xyz="-0.028358 0.039701 3.8215E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.281" />
+      <inertia
+        ixx="0.00019852"
+        ixy="-1.7563E-05"
+        ixz="-3.1422E-20"
+        iyy="0.00027055"
+        iyz="-1.2638E-20"
+        izz="0.00038709" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Hand.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Hand.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wrist"
+    type="revolute">
+    <origin
+      xyz="0.022096 0.37901 -0.043174"
+      rpy="-1.0978 -1.5187E-17 -1.5708" />
+    <parent
+      link="ForeArm" />
+    <child
+      link="Hand" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.36"
+      upper="2.36"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="Finger">
+    <inertial>
+      <origin
+        xyz="0.013252 -3.8887E-16 1.3878E-17"
+        rpy="0 0 0" />
+      <mass
+        value="0.18562" />
+      <inertia
+        ixx="4.051E-05"
+        ixy="9.2093E-21"
+        ixz="-8.2488E-21"
+        iyy="6.2332E-05"
+        iyz="1.0989E-21"
+        izz="7.0561E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Finger.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://scara_setup_model/meshes/Finger.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="FingerJoint"
+    type="revolute">
+    <origin
+      xyz="-0.12711 0.0285 0"
+      rpy="-1.5708 -6.123E-17 3.1416" />
+    <parent
+      link="Hand" />
+    <child
+      link="Finger" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="0"
+      velocity="0" />
+  </joint>
+  
+	<transmission name="TransmissionLinear">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="Linear">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="MotorLinear">
+			<mechanicalReduction>167</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<transmission name="TransmissionShoulder">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="Shoulder">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="MotorShoulder">
+			<mechanicalReduction>2</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<transmission name="TransmissionElbow">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="Elbow">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="MotorElbow">
+			<mechanicalReduction>2</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<transmission name="TransmissionWrist">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="Wrist">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="MotorWrist">
+			<mechanicalReduction>2</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<transmission name="TransmissionFinger">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="FingerJoint">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="MotorFinger">
+			<mechanicalReduction>1</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/scara_setup</robotNamespace>
+		</plugin>
+	</gazebo>
+</robot>

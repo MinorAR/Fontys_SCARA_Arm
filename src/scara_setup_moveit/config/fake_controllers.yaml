@@ -1,0 +1,8 @@
+controller_list:
+  - name: fake_FullArm_controller
+    joints:
+      - Linear
+      - Shoulder
+      - Elbow
+      - Wrist
+      - FingerJoint

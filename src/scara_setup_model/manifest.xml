@@ -1,0 +1,6 @@
+<package>
+  <description brief="scara_setup_model">scara_setup_model</description>
+  <depend package="gazebo" />
+  <author>me</author>
+  <license>BSD</license>
+</package>
