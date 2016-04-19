@@ -83,11 +83,19 @@ Visualization Manager:
           Show Trail: false
           Value: true
         Link Tree Style: Links in Alphabetic Order
-        base_link:
+        effector_tip:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        mount_point:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -97,7 +105,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: base_link
+    Fixed Frame: mount_point
     Frame Rate: 30
   Name: root
   Tools:

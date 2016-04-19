@@ -1,5 +1,7 @@
 <robot
   name="scara_setup">
+  <link name="mount_point"/>
+  <link name="effector_tip" />
   <link
     name="frame">
     <inertial>
@@ -22,7 +24,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/base_link.STL" />
+          filename="package://scara_setup_description/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -36,7 +38,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/base_link.STL" />
+          filename="package://scara_setup_description/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -62,7 +64,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Cart.STL" />
+          filename="package://scara_setup_description/meshes/Cart.STL" />
       </geometry>
       <material
         name="">
@@ -76,10 +78,16 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Cart.STL" />
+          filename="package://scara_setup_description/meshes/Cart.STL" />
       </geometry>
     </collision>
   </link>
+  <joint name="dummy" type="fixed">
+  	<origin xyz="0 0 0" rpy="0 0 0"/>
+  	<parent link="mount_point"/>
+  	<child link="frame"/>
+  </joint>
+  
   <joint
     name="Linear"
     type="prismatic">
@@ -120,7 +128,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Arm.STL" />
+          filename="package://scara_setup_description/meshes/Arm.STL" />
       </geometry>
       <material
         name="">
@@ -134,7 +142,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Arm.STL" />
+          filename="package://scara_setup_description/meshes/Arm.STL" />
       </geometry>
     </collision>
   </link>
@@ -178,7 +186,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/ForeArm.STL" />
+          filename="package://scara_setup_description/meshes/ForeArm.STL" />
       </geometry>
       <material
         name="">
@@ -192,7 +200,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/ForeArm.STL" />
+          filename="package://scara_setup_description/meshes/ForeArm.STL" />
       </geometry>
     </collision>
   </link>
@@ -236,7 +244,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Hand.STL" />
+          filename="package://scara_setup_description/meshes/Hand.STL" />
       </geometry>
       <material
         name="">
@@ -250,7 +258,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Hand.STL" />
+          filename="package://scara_setup_description/meshes/Hand.STL" />
       </geometry>
     </collision>
   </link>
@@ -294,7 +302,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Finger.STL" />
+          filename="package://scara_setup_description/meshes/Finger.STL" />
       </geometry>
       <material
         name="">
@@ -308,7 +316,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_model/meshes/Finger.STL" />
+          filename="package://scara_setup_description/meshes/Finger.STL" />
       </geometry>
     </collision>
   </link>
@@ -329,6 +337,12 @@
       upper="1.57"
       effort="0"
       velocity="0" />
+  </joint>
+  
+  <joint name="tip_joint" type="fixed">
+  	<origin xyz="0.0665 0 0" rpy="1.57 0 0"/>
+  	<parent link="Finger"/>
+  	<child link="effector_tip"/>
   </joint>
   
 	<transmission name="TransmissionLinear">
