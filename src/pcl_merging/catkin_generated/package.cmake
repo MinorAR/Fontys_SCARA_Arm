@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "pcl_merging")
+set(pcl_merging_MAINTAINER "ruud <ruud@todo.todo>")
+set(pcl_merging_DEPRECATED "")
+set(pcl_merging_VERSION "0.0.0")
+set(pcl_merging_BUILD_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all-dev")
+set(pcl_merging_RUN_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all")
+set(pcl_merging_BUILDTOOL_DEPENDS "catkin")

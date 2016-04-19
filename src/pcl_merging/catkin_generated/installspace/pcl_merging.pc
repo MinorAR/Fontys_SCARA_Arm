@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: pcl_merging
+Description: Description of pcl_merging
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 
