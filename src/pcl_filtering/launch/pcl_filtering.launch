@@ -1,0 +1,16 @@
+<launch>
+<node 
+	name="pcl_filtering" 
+	pkg="pcl_filtering" 
+	type="pcl_filtering" 
+	output="screen"
+	args="input:=/camera/depth/points">
+        <!-- passthrought filter parameters -->
+        <param name="xmin" value="-0.5"/>
+        <param name="xmax" value="0.5"/>
+        <param name="ymin" value="-0.5"/>
+        <param name="ymax" value="0.5"/>
+        <param name="zmin" value="0"/>
+        <param name="zmax" value="4"/>
+</node>
+</launch>

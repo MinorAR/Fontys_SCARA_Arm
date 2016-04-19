@@ -1,0 +1,40 @@
+<launch>
+<arg name="xtion" default="true" doc="enable xtion camera"/>
+<arg name="kinect" default="false" doc="enable kinect 1 camera"/>
+<arg name="filtering" default="true" doc="enable pointcloud filtering"/>
+
+<arg name="gui" default="true" doc="enable gui (e.g. rviz)"/>
+
+<group if="$(arg xtion)">
+	<include file="$(find openni2_launch)/launch/openni2.launch" />
+	<param name="depth_registration" value="false"/>
+	<param name="rgb_processing" value="false"/>
+	<param name="depth_registration" value="false"/>
+</group>
+
+<group if="$(arg kinect)">
+        <include file="$(find openni_launch)/launch/openni.launch" />
+</group>
+
+<group> if="$(arg filtering)">
+        <!-- remap output filtering -->
+        <remap from="output_filtered" to="/camera/depth/points_filtered"/>
+	<include file="$(find pcl_filtering)/launch/pcl_filtering.launch" />
+	<!-- passthrough filter parameters -->
+        <param name="/pcl_filtering/xmin" value="-0.5"/>
+        <param name="/pcl_filtering/xmax" value="0.5"/>
+        <param name="/pcl_filtering/ymin" value="-0.5"/>
+        <param name="/pcl_filtering/ymax" value="0.5"/>
+        <param name="/pcl_filtering/zmin" value="0"/>
+        <param name="/pcl_filtering/zmax" value="5"/>
+</group>
+
+<group if="$(arg gui)">
+<node
+        name="rviz"
+        pkg="rviz"
+        type="rviz"
+	respawn="false"
+/>
+</group>
+</launch>
