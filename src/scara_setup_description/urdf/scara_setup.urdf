@@ -1,5 +1,15 @@
 <robot
   name="scara_setup">
+  
+  <gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/scara_setup</robotNamespace>
+			<robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+		</plugin>
+	</gazebo>
+  
+  <link name="world"/>
+  
   <link name="mount_point"/>
   <link name="effector_tip" />
   <link
@@ -400,9 +410,9 @@
 		</actuator>
 	</transmission>
 	
-	<gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/scara_setup</robotNamespace>
-		</plugin>
-	</gazebo>
+	<joint name="fixed" type="fixed">
+		<origin xyz="0 0 0.3" rpy="0 0 0"/>
+		<parent link="world"/>
+		<child link="mount_point"/>
+	</joint>
 </robot>
