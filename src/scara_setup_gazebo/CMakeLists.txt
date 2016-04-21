@@ -6,6 +6,8 @@ project(scara_setup_gazebo)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   gazebo_ros
+  scara_setup_description
+  scara_setup_control
 )
 
 ## System dependencies are found with CMake's conventions

@@ -1,6 +1,0 @@
-<package>
-  <description brief="scara_setup">scara_setup</description>
-  <depend package="gazebo_ros" />
-  <author>me</author>
-  <license>BSD</license>
-</package>
