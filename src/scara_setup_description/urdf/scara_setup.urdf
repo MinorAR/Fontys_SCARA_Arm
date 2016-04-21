@@ -53,7 +53,7 @@
     </collision>
   </link>
   <link
-    name="Cart">
+    name="cart">
     <inertial>
       <origin
         xyz="7.5418545308525E-16 0.0316476937505298 -0.0055045146502736"
@@ -74,7 +74,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Cart.STL" />
+          filename="package://scara_setup_description/meshes/cart.STL" />
       </geometry>
       <material
         name="">
@@ -88,7 +88,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Cart.STL" />
+          filename="package://scara_setup_description/meshes/cart.STL" />
       </geometry>
     </collision>
   </link>
@@ -99,25 +99,25 @@
   </joint>
   
   <joint
-    name="Linear"
+    name="linear"
     type="prismatic">
     <origin
-      xyz="0 -0.0185 0.049"
+      xyz="0 -0.0185 0.08"
       rpy="3.1416 0 0" />
     <parent
       link="frame" />
     <child
-      link="Cart" />
+      link="cart" />
     <axis
       xyz="0 0 -1" />
     <limit
       lower="0"
-      upper="0.4"
-      effort="0"
-      velocity="0" />
+      upper="0.5"
+      effort="1000.0"
+      velocity="10.0" />
   </joint>
   <link
-    name="Arm">
+    name="arm">
     <inertial>
       <origin
         xyz="-0.175 -0.0203005702056909 4.67062637625889E-16"
@@ -138,7 +138,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Arm.STL" />
+          filename="package://scara_setup_description/meshes/arm.STL" />
       </geometry>
       <material
         name="">
@@ -152,30 +152,30 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Arm.STL" />
+          filename="package://scara_setup_description/meshes/arm.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="Shoulder"
+    name="shoulder"
     type="revolute">
     <origin
       xyz="0 0.094508 0.0285"
       rpy="-1.5708 0 -1.5708" />
     <parent
-      link="Cart" />
+      link="cart" />
     <child
-      link="Arm" />
+      link="arm" />
     <axis
       xyz="0 -1 0" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="0"
-      velocity="0" />
+      effort="1.0"
+      velocity="1.0" />
   </joint>
   <link
-    name="ForeArm">
+    name="forearm">
     <inertial>
       <origin
         xyz="0.016044 0.14438 -0.031349"
@@ -196,7 +196,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/ForeArm.STL" />
+          filename="package://scara_setup_description/meshes/forearm.STL" />
       </geometry>
       <material
         name="">
@@ -210,30 +210,30 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/ForeArm.STL" />
+          filename="package://scara_setup_description/meshes/forearm.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="Elbow"
+    name="elbow"
     type="revolute">
     <origin
       xyz="-0.35 0 0"
       rpy="7.3171E-17 -1.0978 1.5708" />
     <parent
-      link="Arm" />
+      link="arm" />
     <child
-      link="ForeArm" />
+      link="forearm" />
     <axis
       xyz="-0.45558 0 0.8902" />
     <limit
       lower="-2.36"
       upper="2.36"
-      effort="0"
-      velocity="0" />
+      effort="1.0"
+      velocity="1.0" />
   </joint>
   <link
-    name="Hand">
+    name="hand">
     <inertial>
       <origin
         xyz="-0.028358 0.039701 3.8215E-16"
@@ -254,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Hand.STL" />
+          filename="package://scara_setup_description/meshes/hand.STL" />
       </geometry>
       <material
         name="">
@@ -268,30 +268,30 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Hand.STL" />
+          filename="package://scara_setup_description/meshes/hand.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="Wrist"
+    name="wrist"
     type="revolute">
     <origin
       xyz="0.022096 0.37901 -0.043174"
       rpy="-1.0978 -1.5187E-17 -1.5708" />
     <parent
-      link="ForeArm" />
+      link="forearm" />
     <child
-      link="Hand" />
+      link="hand" />
     <axis
       xyz="0 -1 0" />
     <limit
       lower="-2.36"
       upper="2.36"
-      effort="0"
-      velocity="0" />
+      effort="1.0"
+      velocity="1.0" />
   </joint>
   <link
-    name="Finger">
+    name="finger">
     <inertial>
       <origin
         xyz="0.013252 -3.8887E-16 1.3878E-17"
@@ -312,7 +312,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Finger.STL" />
+          filename="package://scara_setup_description/meshes/finger.STL" />
       </geometry>
       <material
         name="">
@@ -326,87 +326,88 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/Finger.STL" />
+          filename="package://scara_setup_description/meshes/finger.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="FingerJoint"
+    name="fingerjoint"
     type="revolute">
     <origin
       xyz="-0.12711 0.0285 0"
       rpy="-1.5708 -6.123E-17 3.1416" />
     <parent
-      link="Hand" />
+      link="hand" />
     <child
-      link="Finger" />
+      link="finger" />
     <axis
       xyz="0 1 0" />
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="0"
-      velocity="0" />
+      effort="1.0"
+      velocity="1.0" />
   </joint>
   
   <joint name="tip_joint" type="fixed">
   	<origin xyz="0.0665 0 0" rpy="1.57 0 0"/>
-  	<parent link="Finger"/>
+  	<parent link="finger"/>
   	<child link="effector_tip"/>
   </joint>
   
-	<transmission name="TransmissionLinear">
+	<transmission name="transmissionlinear">
 		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="Linear">
+		<joint name="linear">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</joint>
-		<actuator name="MotorLinear">
+		<actuator name="motorlinear">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>167</mechanicalReduction>
-			<hardwareInterface>EffortJointInterface</hardwareInterface>
+			<!--mechanicalReduction>1</mechanicalReduction-->
 		</actuator>
 	</transmission>
 	
-	<transmission name="TransmissionShoulder">
+	<transmission name="transmissionshoulder">
 		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="Shoulder">
+		<joint name="shoulder">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</joint>
-		<actuator name="MotorShoulder">
+		<actuator name="motorshoulder">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>2</mechanicalReduction>
-			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</actuator>
 	</transmission>
 	
-	<transmission name="TransmissionElbow">
+	<transmission name="transmissionelbow">
 		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="Elbow">
+		<joint name="elbow">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</joint>
-		<actuator name="MotorElbow">
+		<actuator name="motorelbow">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>2</mechanicalReduction>
-			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</actuator>
 	</transmission>
 	
-	<transmission name="TransmissionWrist">
+	<transmission name="transmissionwrist">
 		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="Wrist">
+		<joint name="wrist">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</joint>
-		<actuator name="MotorWrist">
+		<actuator name="motorwrist">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>2</mechanicalReduction>
-			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</actuator>
 	</transmission>
 	
-	<transmission name="TransmissionFinger">
+	<transmission name="transmissionfinger">
 		<type>transmission_interface/SimpleTransmission</type>
-		<joint name="FingerJoint">
+		<joint name="fingerjoint">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</joint>
-		<actuator name="MotorFinger">
+		<actuator name="motorfinger">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>1</mechanicalReduction>
-			<hardwareInterface>EffortJointInterface</hardwareInterface>
 		</actuator>
 	</transmission>
 	

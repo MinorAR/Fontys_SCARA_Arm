@@ -1,25 +1,21 @@
 scara_setup:
-  joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
-
-  Linear_position_controller:
+  linear_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Linear
+    joint: linear
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  Shoulder_position_controller:
+  shoulder_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Shoulder
+    joint: shoulder
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  Elbow_position_controller:
+  elbow_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Elbow
+    joint: elbow
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  Wrist_position_controller:
+  wrist_position_controller:
     type: effort_controllers/JointPositionController
-    joint: Wrist
+    joint: wrist
     pid: {p: 100.0, i: 0.01, d: 10.0}
-  FingerJoint_position_controller:
+  fingerjoint_position_controller:
     type: effort_controllers/JointPositionController
-    joint: FingerJoint
+    joint: fingerjoint
     pid: {p: 100.0, i: 0.01, d: 10.0}

@@ -1,11 +1,19 @@
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->
-  <rosparam file="$(find scara_setup_control)/config/scara_setup.yaml" command="load"/>
+  <!--<rosparam file="$(find scara_setup_control)/config/scara_setup.yaml" command="load"/>-->
 
   <!-- load the controllers -->
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/scara_setup" args="Linear_position_controller Shoulder_position_controller Elbow_position_controller Wrist_position_controller FingerJoint_position_controller joint_state_controller"/>
+  <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/scara_setup" args="joint_state_controller linear_position_controller shoulder_position_controller elbow_position_controller wrist_position_controller fingerjoint_position_controller"/>-->
+
+<rosparam file="$(find scara_setup_control)/config/scara_setup_joint_state_controller.yaml" command="load"/>
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" 
+    	output="screen" ns="/scara_setup" args="joint_state_controller" />
+
+ <rosparam file="$(find scara_setup_control)/config/scara_setup_joint_trajectory_controller.yaml" command="load"/>
+    <node name="joint_trajectory_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" 
+    	output="screen" ns="/scara_setup" args="scara_setup_controller" />
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
