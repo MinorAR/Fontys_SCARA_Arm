@@ -23,7 +23,6 @@
     <disable_collisions link1="arm" link2="forearm" reason="Adjacent" />
     <disable_collisions link1="arm" link2="frame" reason="Never" />
     <disable_collisions link1="arm" link2="hand" reason="Never" />
-    <disable_collisions link1="cart" link2="finger" reason="Never" />
     <disable_collisions link1="cart" link2="forearm" reason="Never" />
     <disable_collisions link1="cart" link2="frame" reason="Adjacent" />
     <disable_collisions link1="cart" link2="hand" reason="Never" />

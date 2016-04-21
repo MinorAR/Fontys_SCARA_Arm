@@ -4,26 +4,26 @@
 joint_limits:
   elbow:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 198
     has_acceleration_limits: false
     max_acceleration: 0
   fingerjoint:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 370
     has_acceleration_limits: false
     max_acceleration: 0
   linear:
     has_velocity_limits: true
-    max_velocity: 10
+    max_velocity: 0.3
     has_acceleration_limits: false
     max_acceleration: 0
   shoulder:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 198
     has_acceleration_limits: false
     max_acceleration: 0
   wrist:
     has_velocity_limits: true
-    max_velocity: 1
+    max_velocity: 198
     has_acceleration_limits: false
     max_acceleration: 0

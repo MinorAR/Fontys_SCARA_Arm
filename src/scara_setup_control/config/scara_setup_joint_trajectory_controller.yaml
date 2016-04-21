@@ -13,8 +13,8 @@ scara_setup:
       stopped_velocity_tolerance: 0.02 # Override default
 
     gains: 
-      linear: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 10}
-      shoulder: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 10}
-      elbow: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 10}
-      wrist: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 10}
-      fingerjoint: {p: 100.0, i: 0.01, d: 10.0, i_clamp: 10}
+      linear: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      shoulder: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      elbow: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      wrist: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      fingerjoint: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}

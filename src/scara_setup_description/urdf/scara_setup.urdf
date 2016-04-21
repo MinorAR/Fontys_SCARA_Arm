@@ -12,21 +12,22 @@
   
   <link name="mount_point"/>
   <link name="effector_tip" />
+  
   <link
     name="frame">
     <inertial>
       <origin
-        xyz="1.3844408662302E-17 0.00321259358385474 0.261"
+        xyz="1.3981E-17 0.0032126 0.261"
         rpy="0 0 0" />
       <mass
-        value="1.493046" />
+        value="1.493" />
       <inertia
-        ixx="0.0358036406167454"
-        ixy="5.47977803491302E-19"
-        ixz="2.27329839952438E-18"
-        iyy="0.0363239091207001"
-        iyz="5.42060051450622E-18"
-        izz="0.000727504353445348" />
+        ixx="0.035804"
+        ixy="5.4728E-19"
+        ixz="2.2733E-18"
+        iyy="0.036324"
+        iyz="5.4113E-18"
+        izz="0.0007275" />
     </inertial>
     <visual>
       <origin
@@ -39,7 +40,7 @@
       <material
         name="">
         <color
-          rgba="0.101960784313725 0.101960784313725 0.101960784313725 1" />
+          rgba="0.10 0.10 0.10 1" />
       </material>
     </visual>
     <collision>
@@ -56,17 +57,17 @@
     name="cart">
     <inertial>
       <origin
-        xyz="7.5418545308525E-16 0.0316476937505298 -0.0055045146502736"
+        xyz="7.4785E-16 0.042057 -0.0068325"
         rpy="0 0 0" />
       <mass
-        value="0.571810586822584" />
+        value="1.2438" />
       <inertia
-        ixx="0.0012650642271779"
-        ixy="-2.79830099705637E-19"
-        ixz="3.17194898729487E-20"
-        iyy="0.00043905267530355"
-        iyz="-9.10320245977086E-05"
-        izz="0.00106491934489785" />
+        ixx="0.0025533"
+        ixy="-3.4203E-19"
+        ixz="3.2915E-20"
+        iyy="0.00099474"
+        iyz="-0.00015732"
+        izz="0.0021336" />
     </inertial>
     <visual>
       <origin
@@ -79,7 +80,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.3 0.3 0.3 1" />
       </material>
     </visual>
     <collision>
@@ -92,17 +93,11 @@
       </geometry>
     </collision>
   </link>
-  <joint name="dummy" type="fixed">
-  	<origin xyz="0 0 0" rpy="0 0 0"/>
-  	<parent link="mount_point"/>
-  	<child link="frame"/>
-  </joint>
-  
   <joint
     name="linear"
     type="prismatic">
     <origin
-      xyz="0 -0.0185 0.08"
+      xyz="0 -0.0185 0.049"
       rpy="3.1416 0 0" />
     <parent
       link="frame" />
@@ -112,25 +107,25 @@
       xyz="0 0 -1" />
     <limit
       lower="0"
-      upper="0.5"
-      effort="1000.0"
-      velocity="10.0" />
+      upper="0.424"
+      effort="500"
+      velocity="0.3" />
   </joint>
   <link
     name="arm">
     <inertial>
       <origin
-        xyz="-0.175 -0.0203005702056909 4.67062637625889E-16"
+        xyz="-0.175 -0.020313 4.6762E-16"
         rpy="0 0 0" />
       <mass
-        value="0.313727406555667" />
+        value="0.81408" />
       <inertia
-        ixx="7.33963970221476E-05"
-        ixy="3.72694496791892E-20"
-        ixz="1.71820782957866E-19"
-        iyy="0.0068480445038199"
-        iyz="-1.28131378462755E-21"
-        izz="0.006840237379281" />
+        ixx="0.00019071"
+        ixy="9.995E-20"
+        ixz="4.4929E-19"
+        iyy="0.018314"
+        iyz="-2.5163E-21"
+        izz="0.018293" />
     </inertial>
     <visual>
       <origin
@@ -143,7 +138,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.5 0.5 0.5 1" />
       </material>
     </visual>
     <collision>
@@ -169,26 +164,26 @@
     <axis
       xyz="0 -1 0" />
     <limit
-      lower="-1.57"
-      upper="1.57"
-      effort="1.0"
-      velocity="1.0" />
+      lower="-2.35"
+      upper="2.35"
+      effort="6"
+      velocity="198" />
   </joint>
   <link
     name="forearm">
     <inertial>
       <origin
-        xyz="0.016044 0.14438 -0.031349"
+        xyz="0.016144 0.14226 -0.031545"
         rpy="0 0 0" />
       <mass
-        value="0.46163" />
+        value="1.2068" />
       <inertia
-        ixx="0.01102"
-        ixy="-0.0001634"
-        ixz="-5.2062E-05"
-        iyy="0.00025416"
-        iyz="0.00031928"
-        izz="0.010944" />
+        ixx="0.029279"
+        ixy="-0.00043309"
+        ixz="-0.00013982"
+        iyy="0.00067544"
+        iyz="0.00084625"
+        izz="0.029078" />
     </inertial>
     <visual>
       <origin
@@ -201,7 +196,7 @@
       <material
         name="">
         <color
-          rgba="0.75294 0.75294 0.75294 1" />
+          rgba="0.3 0.3 0.3 1" />
       </material>
     </visual>
     <collision>
@@ -227,26 +222,26 @@
     <axis
       xyz="-0.45558 0 0.8902" />
     <limit
-      lower="-2.36"
-      upper="2.36"
-      effort="1.0"
-      velocity="1.0" />
+      lower="-2.35"
+      upper="2.35"
+      effort="6"
+      velocity="198" />
   </joint>
   <link
     name="hand">
     <inertial>
       <origin
-        xyz="-0.028358 0.039701 3.8215E-16"
+        xyz="-0.026933 0.039937 3.8201E-16"
         rpy="0 0 0" />
       <mass
-        value="0.281" />
+        value="0.74303" />
       <inertia
-        ixx="0.00019852"
-        ixy="-1.7563E-05"
-        ixz="-3.1422E-20"
-        iyy="0.00027055"
-        iyz="-1.2638E-20"
-        izz="0.00038709" />
+        ixx="0.00052896"
+        ixy="-5.9533E-05"
+        ixz="-7.7098E-20"
+        iyy="0.00065045"
+        iyz="-3.2636E-20"
+        izz="0.00096529" />
     </inertial>
     <visual>
       <origin
@@ -259,7 +254,7 @@
       <material
         name="">
         <color
-          rgba="0.75294 0.75294 0.75294 1" />
+          rgba="0.5 0.5 0.5 1" />
       </material>
     </visual>
     <collision>
@@ -285,23 +280,23 @@
     <axis
       xyz="0 -1 0" />
     <limit
-      lower="-2.36"
-      upper="2.36"
-      effort="1.0"
-      velocity="1.0" />
+      lower="-2.35"
+      upper="2.35"
+      effort="6"
+      velocity="198" />
   </joint>
   <link
     name="finger">
     <inertial>
       <origin
-        xyz="0.013252 -3.8887E-16 1.3878E-17"
+        xyz="0.013252 -3.8877E-16 1.3878E-17"
         rpy="0 0 0" />
       <mass
         value="0.18562" />
       <inertia
         ixx="4.051E-05"
-        ixy="9.2093E-21"
-        ixz="-8.2488E-21"
+        ixy="9.178E-21"
+        ixz="-8.2786E-21"
         iyy="6.2332E-05"
         iyz="1.0989E-21"
         izz="7.0561E-05" />
@@ -317,7 +312,7 @@
       <material
         name="">
         <color
-          rgba="0.75294 0.75294 0.75294 1" />
+          rgba="0.3 0.3 0.3 1" />
       </material>
     </visual>
     <collision>
@@ -345,8 +340,14 @@
     <limit
       lower="-1.57"
       upper="1.57"
-      effort="1.0"
-      velocity="1.0" />
+      effort="1.5"
+      velocity="370" />
+  </joint>
+  
+  <joint name="dummy" type="fixed">
+  	<origin xyz="0 0 0" rpy="0 0 0"/>
+  	<parent link="mount_point"/>
+  	<child link="frame"/>
   </joint>
   
   <joint name="tip_joint" type="fixed">
