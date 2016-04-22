@@ -1,3 +1,9 @@
 [submodule "src/trac_ik"]
 	path = src/trac_ik
 	url = https://bitbucket.org/traclabs/trac_ik.git
+[submodule "src/gazebo_ros_demos"]
+	path = src/gazebo_ros_demos
+	url = https://github.com/ros-simulation/gazebo_ros_demos.git
+[submodule "src/hector_small_arm_common"]
+	path = src/hector_small_arm_common
+	url = https://github.com/tu-darmstadt-ros-pkg/hector_small_arm_common.git
