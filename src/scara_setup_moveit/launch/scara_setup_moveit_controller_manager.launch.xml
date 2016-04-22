@@ -1,5 +1,3 @@
 <launch>
-	<param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
 
-	<rosparam file="$(find scara_setup_moveit)/config/controllers.yaml"/>
 </launch>
