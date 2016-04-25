@@ -1,5 +1,7 @@
 <launch>
 
+<node name="scara_setup_hwa" pkg="scara_setup_control" type="scara_setup_hwa" respawn="false" ns="/scara_setup" />
+
 <!-- Load the joint state controller for the robot -->
 <rosparam file="$(find scara_setup_control)/config/scara_setup_joint_state_controller.yaml" command="load"/>
     <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" 

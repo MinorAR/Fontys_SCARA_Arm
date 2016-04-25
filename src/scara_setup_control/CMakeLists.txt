@@ -4,7 +4,7 @@ project(scara_setup_control)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED controller_manager robot_state_publisher)
+find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_controllers dynamixel_msgs)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -96,7 +96,7 @@ find_package(catkin REQUIRED controller_manager robot_state_publisher)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES scara_setup_control
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
@@ -108,7 +108,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+ include_directories(include)
 
 ## Declare a C++ library
 # add_library(scara_setup_control
@@ -121,16 +121,16 @@ catkin_package(
 # add_dependencies(scara_setup_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(scara_setup_control_node src/scara_setup_control_node.cpp)
+ add_executable(scara_setup_hwa src/scara_setup_hwa.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(scara_setup_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(scara_setup_control_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(scara_setup_hwa
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
