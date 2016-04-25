@@ -1,0 +1,20 @@
+scara_setup:
+  scara_setup_controller:
+    type: effort_controllers/JointTrajectoryController
+    joints: 
+      - linear
+      - shoulder
+      - elbow
+      - wrist
+      - fingerjoint
+
+    constraints:
+      goal_time: 0.5                   # Override default
+      stopped_velocity_tolerance: 0.02 # Override default
+
+    gains: 
+      linear: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      shoulder: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      elbow: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      wrist: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
+      fingerjoint: {p: 10000.0, i: 1, d: 10.0, i_clamp: 10000}
