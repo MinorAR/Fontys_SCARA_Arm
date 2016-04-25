@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ruud/catkin_ws/src/pcl_capturing/devel/setup.sh

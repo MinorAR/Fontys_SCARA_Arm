@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: pcl_capturing
+Description: Description of pcl_capturing
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

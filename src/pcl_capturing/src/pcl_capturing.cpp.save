@@ -1,0 +1,92 @@
+#include <ros/ros.h>
+// PCL specific includes
+#include <pcl_ros/point_cloud.h>
+#include <pcl/point_types.h>
+#include <pcl/conversions.h>
+#include <pcl/PCLPointCloud2.h>
+//transform
+#include <tf/transform_listener.h>
+#include <pcl_ros/impl/transforms.hpp>
+// passthrough filter
+#include <iostream>
+#include <pcl/filters/passthrough.h>
+//move it
+
+
+ros::Publisher pub;
+
+void
+cloud_cb (const pcl::PCLPointCloud2ConstPtr& input)
+{
+  ros::NodeHandle nh;
+  tf::TransformListener listener;
+  tf::StampedTransform transform;
+
+  moveit::planning_interface::MoveGroup group("FullArm");
+
+  pcl::PointCloud<pcl::PointXYZ> cloud_tf, cloud_merged, cloud_pass;
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_converted (new pcl::PointCloud<pcl::PointXYZ>);
+
+  // convert pointcloud2 to pointxyz
+  pcl::fromPCLPointCloud2(*input, *cloud_converted);
+
+  // pass through filter
+  float limits [5]; //xmin, xmax, ymin, ymax, zmin, zmax;
+  nh.getParam("xmin", limits [0]);
+  nh.getParam("xmax", limits [1]);
+  nh.getParam("ymin", limits [2]);
+  nh.getParam("ymax", limits [3]);
+  nh.getParam("zmin", limits [4]);
+  nh.getParam("zmax", limits [5]);
+
+  pcl::PassThrough<pcl::PointXYZ> pass_through_filter;
+  pass_through_filter.setInputCloud (cloud_converted);
+  pass_through_filter.setFilterFieldName ("x");
+  pass_through_filter.setFilterLimits (limits [0], limits [1]);
+  pass_through_filter.setFilterFieldName ("y");
+  pass_through_filter.setFilterLimits (limits [2], limits [3]);
+  pass_through_filter.setFilterFieldName ("z");
+  pass_through_filter.setFilterLimits (limits [4], limits [5]);
+
+  // begin loop??
+
+  // move to goal
+
+  // when goal reached:
+
+  // get transform position of camera
+  ros::Time now = ros::Time::now();
+  listener.waitForTransform("/base_link", "/camera_link", now, ros::Duration(3.0));
+  listener.lookupTransform("/base_link", "/camera_link",ros::Time(0), transform);
+
+  // apply passthrough filter
+  pass_through_filter.filter (cloud_pass);
+  // transform pointcloud
+  pcl_ros::transformPointCloud ( cloud_pass , cloud_tf, transform);
+  // merge pointcloud
+  cloud_merged += cloud_tf;
+
+  // Write the downsampled version to disk
+  pcl::PCDWriter writer;
+  writer.write<pcl::PointXYZ> ("cloud_merged.pcd", cloud_merged, false);
+  // Publish the data.
+  pub.publish (cloud_merged);
+
+}
+
+int
+main (int argc, char** argv)
+{
+  // Initialize ROS
+  ros::init (argc, argv, "pcl_capturing");
+  ros::NodeHandle nh;
+
+  // Create a ROS subscriber for the input point cloud
+  ros::Subscriber sub = nh.subscribe ("input", 1, cloud_cb);
+
+  // Create a ROS publisher for the output point cloud
+  pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ("pointcloud_merged", 1);
+
+  // Spin
+  ros::spin ();
+}
