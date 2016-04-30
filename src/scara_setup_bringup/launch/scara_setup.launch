@@ -9,5 +9,9 @@
   <include file="$(find scara_setup_control)/launch/scara_setup_control.launch" />
   
   <include file="$(find scara_setup_moveit)/launch/move_group.launch" />
+  
+  <include file="$(find scara_setup_dynamixel)/launch/hw_controller_manager.launch" />
+  
+  <include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" />
 
 </launch>

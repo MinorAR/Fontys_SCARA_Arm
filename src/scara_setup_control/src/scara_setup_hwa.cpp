@@ -74,22 +74,22 @@ scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 
 void scara_setup::ScaraSetupHWA::shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state)
 {
-	jnt_pos[1] = -state->current_pos / trans[1];
+	jnt_pos[1] = state->current_pos / trans[1];
 }
 
 void scara_setup::ScaraSetupHWA::elbowCb(const dynamixel_msgs::JointState::ConstPtr& state)
 {
-	jnt_pos[2] = state->current_pos / trans[2];
+	jnt_pos[2] = -state->current_pos / trans[2];
 }
 
 void scara_setup::ScaraSetupHWA::wristCb(const dynamixel_msgs::JointState::ConstPtr& state)
 {
-	jnt_pos[3] = state->current_pos / trans[3];
+	jnt_pos[3] = -state->current_pos / trans[3];
 }
 
 void scara_setup::ScaraSetupHWA::fingerjointCb(const dynamixel_msgs::JointState::ConstPtr& state)
 {
-	jnt_pos[4] = state->current_pos / trans[4];
+	jnt_pos[4] = -state->current_pos / trans[4];
 }
 
 void scara_setup::ScaraSetupHWA::read()
@@ -112,19 +112,19 @@ void scara_setup::ScaraSetupHWA::write()
 	std_msgs::Float64 msg;
 	
 	act_cmd[1] = jnt_cmd[1] * trans[1];
-	msg.data = -act_cmd[1];
+	msg.data = act_cmd[1];
 	shoulder_cmd_pub.publish(msg);
 	
 	act_cmd[2] = jnt_cmd[2] * trans[2];
-	msg.data = act_cmd[2];
+	msg.data = -act_cmd[2];
 	elbow_cmd_pub.publish(msg);
 	
 	act_cmd[3] = jnt_cmd[3] * trans[3];
-	msg.data = act_cmd[3];
+	msg.data = -act_cmd[3];
 	wrist_cmd_pub.publish(msg);
 	
 	act_cmd[4] = jnt_cmd[4] * trans[4];
-	msg.data = act_cmd[4];
+	msg.data = -act_cmd[4];
 	fingerjoint_cmd_pub.publish(msg);
 }
 
