@@ -74,7 +74,7 @@ scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 
 void scara_setup::ScaraSetupHWA::shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state)
 {
-	jnt_pos[1] = state->current_pos / trans[1];
+	jnt_pos[1] = -state->current_pos / trans[1];
 }
 
 void scara_setup::ScaraSetupHWA::elbowCb(const dynamixel_msgs::JointState::ConstPtr& state)
@@ -112,7 +112,7 @@ void scara_setup::ScaraSetupHWA::write()
 	std_msgs::Float64 msg;
 	
 	act_cmd[1] = jnt_cmd[1] * trans[1];
-	msg.data = act_cmd[1];
+	msg.data = -act_cmd[1];
 	shoulder_cmd_pub.publish(msg);
 	
 	act_cmd[2] = jnt_cmd[2] * trans[2];
