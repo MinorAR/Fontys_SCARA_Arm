@@ -3,45 +3,66 @@
 scara_setup::ScaraSetupHWA::ScaraSetupHWA()
 {
 	// connect and register the joint state interface
-	hardware_interface::JointStateHandle state_handle_linear("linear", &pos[0], &vel[0], &eff[0]);
+	hardware_interface::JointStateHandle state_handle_linear("linear", &jnt_pos[0], &jnt_vel[0], &jnt_eff[0]);
    jnt_state_interface.registerHandle(state_handle_linear);
 
-   hardware_interface::JointStateHandle state_handle_shoulder("shoulder", &pos[1], &vel[1], &eff[1]);
+   hardware_interface::JointStateHandle state_handle_shoulder("shoulder", &jnt_pos[1], &jnt_vel[1], &jnt_eff[1]);
    jnt_state_interface.registerHandle(state_handle_shoulder);
    
-   hardware_interface::JointStateHandle state_handle_elbow("elbow", &pos[2], &vel[2], &eff[2]);
+   hardware_interface::JointStateHandle state_handle_elbow("elbow", &jnt_pos[2], &jnt_vel[2], &jnt_eff[2]);
    jnt_state_interface.registerHandle(state_handle_elbow);
    
-   hardware_interface::JointStateHandle state_handle_wrist("wrist", &pos[3], &vel[3], &eff[3]);
+   hardware_interface::JointStateHandle state_handle_wrist("wrist", &jnt_pos[3], &jnt_vel[3], &jnt_eff[3]);
    jnt_state_interface.registerHandle(state_handle_wrist);
    
-   hardware_interface::JointStateHandle state_handle_fingerjoint("fingerjoint", &pos[4], &vel[4], &eff[4]);
+   hardware_interface::JointStateHandle state_handle_fingerjoint("fingerjoint", &jnt_pos[4], &jnt_vel[4], &jnt_eff[4]);
    jnt_state_interface.registerHandle(state_handle_fingerjoint);
 
    registerInterface(&jnt_state_interface);
 
    // connect and register the joint position interface
-   hardware_interface::JointHandle pos_handle_linear(jnt_state_interface.getHandle("linear"), &cmd[0]);
+   hardware_interface::JointHandle pos_handle_linear(jnt_state_interface.getHandle("linear"), &jnt_cmd[0]);
    jnt_pos_interface.registerHandle(pos_handle_linear);
 
-   hardware_interface::JointHandle pos_handle_shoulder(jnt_state_interface.getHandle("shoulder"), &cmd[1]);
+   hardware_interface::JointHandle pos_handle_shoulder(jnt_state_interface.getHandle("shoulder"), &jnt_cmd[1]);
    jnt_pos_interface.registerHandle(pos_handle_shoulder);
    
-   hardware_interface::JointHandle pos_handle_elbow(jnt_state_interface.getHandle("elbow"), &cmd[2]);
+   hardware_interface::JointHandle pos_handle_elbow(jnt_state_interface.getHandle("elbow"), &jnt_cmd[2]);
    jnt_pos_interface.registerHandle(pos_handle_elbow);
    
-   hardware_interface::JointHandle pos_handle_wrist(jnt_state_interface.getHandle("wrist"), &cmd[3]);
+   hardware_interface::JointHandle pos_handle_wrist(jnt_state_interface.getHandle("wrist"), &jnt_cmd[3]);
    jnt_pos_interface.registerHandle(pos_handle_wrist);
    
-   hardware_interface::JointHandle pos_handle_fingerjoint(jnt_state_interface.getHandle("fingerjoint"), &cmd[4]);
+   hardware_interface::JointHandle pos_handle_fingerjoint(jnt_state_interface.getHandle("fingerjoint"), &jnt_cmd[4]);
    jnt_pos_interface.registerHandle(pos_handle_fingerjoint);
 
    registerInterface(&jnt_pos_interface);
+   
+   // connect and register transmissions
+   /*transmission_interface::SimpleTransmission wrist_trans(2.0);
+
+   wrist_actuator_data.position.push_back(&act_cmd[3]);
+   
+   wrist_joint_data.position.push_back(&jnt_cmd[3]);
+   
+   jnt_to_act.registerHandle(transmission_interface::JointToActuatorPositionHandle("wrist_trans_jnt_to_act", &wrist_trans, wrist_actuator_data, wrist_joint_data));*/
+   //act_to_jnt.registerHandle(transmission_interface::ActuatorToJointPositionHandle("wrist_trans_act_to_jnt", &wrist_trans, wrist_actuator_data, wrist_joint_data));
+   
+   trans[3] = 2.0; //<- third joint is the wrist
+   
+   //set up the publishers
+   wrist_cmd_pub = n.advertise<std_msgs::Float64>("/wrist_hw_controller/command", 1000);
+   wrist_state_sub = n.subscribe("/wrist_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::wristCb, this);
 }
 
 scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 {
 	//
+}
+
+void scara_setup::ScaraSetupHWA::wristCb(const dynamixel_msgs::JointState::ConstPtr& state)
+{
+	jnt_pos[3] = state->current_pos / trans[3];
 }
 
 void scara_setup::ScaraSetupHWA::read()
@@ -51,11 +72,22 @@ void scara_setup::ScaraSetupHWA::read()
 
 void scara_setup::ScaraSetupHWA::write()
 {
-	pos[0] = cmd[0];
-	pos[1] = cmd[1];
-	pos[2] = cmd[2];
-	pos[3] = cmd[3];
-	pos[4] = cmd[4];
+	//bypassing the feedback loop here
+	jnt_pos[0] = jnt_cmd[0];
+	jnt_pos[1] = jnt_cmd[1];
+	jnt_pos[2] = jnt_cmd[2];
+	//jnt_pos[3] = jnt_cmd[3];
+	jnt_pos[4] = jnt_cmd[4];
+	
+	//convert joint commands to actuator commands using transmissions
+	//jnt_to_act.propagate();
+	
+	std_msgs::Float64 msg;
+	act_cmd[3] = jnt_cmd[3] * trans[3];
+	msg.data = act_cmd[3];
+	//msg.data = jnt_pos[3];
+	
+	wrist_cmd_pub.publish(msg);
 }
 
 int main(int argc, char** argv)
@@ -79,7 +111,7 @@ int main(int argc, char** argv)
 		ros::Duration et = ct - lt;
 		lt = ct;
 		
-		robot.read();
+		//robot.read(); <- hw pos constantly updated by the callbacks
 		cm.update(ct, et);
 		robot.write();
 		

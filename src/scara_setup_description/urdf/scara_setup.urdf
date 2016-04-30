@@ -164,8 +164,8 @@
     <axis
       xyz="0 -1 0" />
     <limit
-      lower="-2.35"
-      upper="2.35"
+      lower="-1.57"
+      upper="1.57"
       effort="6"
       velocity="198" />
   </joint>
@@ -222,8 +222,8 @@
     <axis
       xyz="-0.45558 0 0.8902" />
     <limit
-      lower="-2.35"
-      upper="2.35"
+      lower="-1.57"
+      upper="1.57"
       effort="6"
       velocity="198" />
   </joint>
@@ -280,8 +280,8 @@
     <axis
       xyz="0 -1 0" />
     <limit
-      lower="-2.35"
-      upper="2.35"
+      lower="-1.57"
+      upper="1.57"
       effort="6"
       velocity="198" />
   </joint>
@@ -364,7 +364,6 @@
 		<actuator name="motorlinear">
 			<hardwareInterface>EffortJointInterface</hardwareInterface>
 			<mechanicalReduction>167</mechanicalReduction>
-			<!--mechanicalReduction>1</mechanicalReduction-->
 		</actuator>
 	</transmission>
 	
