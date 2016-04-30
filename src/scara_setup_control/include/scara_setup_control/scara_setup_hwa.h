@@ -20,7 +20,10 @@ namespace scara_setup {
 		ScaraSetupHWA();
 		~ScaraSetupHWA();
 		
+		void shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state);
+		void elbowCb(const dynamixel_msgs::JointState::ConstPtr& state);
 		void wristCb(const dynamixel_msgs::JointState::ConstPtr& state);
+		void fingerjointCb(const dynamixel_msgs::JointState::ConstPtr& state);
 	
 		void read();
 		void write();
@@ -48,8 +51,14 @@ namespace scara_setup {
 		double trans[5];
 		
 		ros::NodeHandle n;
+		ros::Publisher shoulder_cmd_pub;
+		ros::Subscriber shoulder_state_sub;
+		ros::Publisher elbow_cmd_pub;
+		ros::Subscriber elbow_state_sub;
 		ros::Publisher wrist_cmd_pub;
 		ros::Subscriber wrist_state_sub;
+		ros::Publisher fingerjoint_cmd_pub;
+		ros::Subscriber fingerjoint_state_sub;
 	};
 };
 
