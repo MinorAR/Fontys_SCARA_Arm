@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(scara_setup_control_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/home/jeroen/Software/scara_arm_ws/src/scara_setup_control/include " STREQUAL " ")
   set(scara_setup_control_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/home/jeroen/Software/scara_arm_ws/src/scara_setup_control/include")
   foreach(idir ${_include_dirs})
     if(IS_ABSOLUTE ${idir} AND IS_DIRECTORY ${idir})
       set(include ${idir})

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>scara_setup_control</name>
+  <name>scara_setup_dynamixel</name>
   <version>0.0.0</version>
-  <description>The scara_setup_control package</description>
+  <description>The dynamixel_test package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but mutiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/scara_setup_control</url> -->
+  <!-- <url type="website">http://wiki.ros.org/dynamixel_test</url> -->
 
 
   <!-- Author tags are optional, mutiple are allowed, one per tag -->
@@ -40,14 +40,14 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>controller_manager</build_depend>
-  <run_depend>controller_manager</run_depend>
-  <build_depend>robot_state_publisher</build_depend>
-  <run_depend>robot_state_publisher</run_depend>
   <build_depend>dynamixel_controllers</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
   <run_depend>dynamixel_controllers</run_depend>
-  <build_depend>dynamixel_msgs</build_depend>
-  <run_depend>dynamixel_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

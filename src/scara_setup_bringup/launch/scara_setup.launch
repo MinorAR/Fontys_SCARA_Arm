@@ -1,0 +1,17 @@
+<launch>
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <!--<param name="robot_description"
+	 command="$(find xacro)/xacro.py '$(find rrbot_description)/urdf/rrbot.xacro'" />-->
+	 <param name="robot_description"
+	 	textfile="$(find scara_setup_description)/urdf/scara_setup.urdf"/>
+
+  <!-- ros_control rrbot launch file -->
+  <include file="$(find scara_setup_control)/launch/scara_setup_control.launch" />
+  
+  <include file="$(find scara_setup_moveit)/launch/move_group.launch" />
+  
+  <include file="$(find scara_setup_dynamixel)/launch/hw_controller_manager.launch" />
+  
+  <include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" />
+
+</launch>

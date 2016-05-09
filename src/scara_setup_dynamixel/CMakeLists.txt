@@ -1,10 +1,15 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(scara_setup_control)
+project(scara_setup_dynamixel)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_controllers dynamixel_msgs std_msgs)
+find_package(catkin REQUIRED COMPONENTS
+  dynamixel_controllers
+  roscpp
+  rospy
+  std_msgs
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -63,7 +68,7 @@ find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   std_msgs
 # )
 
 ################################################
@@ -96,9 +101,9 @@ find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  INCLUDE_DIRS include
-#  LIBRARIES scara_setup_control
-#  CATKIN_DEPENDS other_catkin_pkg
+#  INCLUDE_DIRS include
+#  LIBRARIES dynamixel_test
+#  CATKIN_DEPENDS dynamixel_controllers roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -108,29 +113,32 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
- include_directories(include)
+# include_directories(include)
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a C++ library
-# add_library(scara_setup_control
-#   src/${PROJECT_NAME}/scara_setup_control.cpp
+# add_library(dynamixel_test
+#   src/${PROJECT_NAME}/dynamixel_test.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(scara_setup_control ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(dynamixel_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
- add_executable(scara_setup_hwa src/scara_setup_hwa.cpp)
+# add_executable(dynamixel_test_node src/dynamixel_test_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(scara_setup_control_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(dynamixel_test_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(scara_setup_hwa
-   ${catkin_LIBRARIES}
- )
+# target_link_libraries(dynamixel_test_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -147,7 +155,7 @@ catkin_package(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS scara_setup_control scara_setup_control_node
+# install(TARGETS dynamixel_test dynamixel_test_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -172,7 +180,7 @@ catkin_package(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_scara_setup_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_dynamixel_test.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

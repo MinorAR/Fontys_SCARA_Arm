@@ -1,5 +1,7 @@
 <launch>
-	<param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
+	  <!-- Set the param that trajectory_execution_manager needs to find the controller plugin -->
+  <param name="moveit_controller_manager" value="moveit_simple_controller_manager/MoveItSimpleControllerManager"/>
 
-	<rosparam file="$(find scara_setup_moveit)/config/controllers.yaml"/>
+  <!-- The rest of the params are specific to this plugin -->
+  <rosparam file="$(find scara_setup_moveit)/config/controllers.yaml"/>
 </launch>
