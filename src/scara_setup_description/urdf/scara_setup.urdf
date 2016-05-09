@@ -17,17 +17,17 @@
     name="frame">
     <inertial>
       <origin
-        xyz="1.3981E-17 0.261 -0.0032126"
+        xyz="-1.3962E-17 -0.0032126 0.261"
         rpy="0 0 0" />
       <mass
         value="1.493" />
       <inertia
         ixx="0.035804"
-        ixy="2.2733E-18"
-        ixz="-5.475E-19"
-        iyy="0.0007275"
-        iyz="-3.2317E-18"
-        izz="0.036324" />
+        ixy="5.4774E-19"
+        ixz="-2.3172E-18"
+        iyy="0.036324"
+        iyz="-3.2402E-18"
+        izz="0.0007275" />
     </inertial>
     <visual>
       <origin
@@ -35,7 +35,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/base_link.STL" />
+          filename="package://scara_setup_description/meshes/frame.STL" />
       </geometry>
       <material
         name="">
@@ -49,7 +49,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://scara_setup_description/meshes/base_link.STL" />
+          filename="package://scara_setup_description/meshes/frame.STL" />
       </geometry>
     </collision>
   </link>
@@ -57,16 +57,16 @@
     name="cart">
     <inertial>
       <origin
-        xyz="3.2748E-17 0.046688 -0.0065656"
+        xyz="2.8028E-18 0.049288 0.0065656"
         rpy="0 0 0" />
       <mass
         value="1.2925" />
       <inertia
         ixx="0.0030664"
-        ixy="7.5083E-20"
-        ixz="-6.4252E-20"
+        ixy="-1.3057E-19"
+        ixz="5.1704E-19"
         iyy="0.001007"
-        iyz="-7.8657E-05"
+        iyz="7.8657E-05"
         izz="0.0026482" />
     </inertial>
     <visual>
@@ -97,35 +97,35 @@
     name="linear"
     type="prismatic">
     <origin
-      xyz="0 -0.0185 0.049001"
-      rpy="3.1416 0 0" />
+      xyz="0 0.0159 0.049"
+      rpy="1.3878E-15 -1.3878E-15 -7.9703E-17" />
     <parent
       link="frame" />
     <child
       link="cart" />
     <axis
-      xyz="0 0 -1" />
+      xyz="0 0 1" />
     <limit
       lower="0"
       upper="0.424"
-      effort="500"
-      velocity="0.3" />
+      effort="501"
+      velocity="0.0063" />
   </joint>
   <link
     name="arm">
     <inertial>
       <origin
-        xyz="-0.175 -0.020313 9.0057E-17"
+        xyz="-4.8333E-17 0.175 -0.020313"
         rpy="0 0 0" />
       <mass
         value="0.81408" />
       <inertia
-        ixx="0.00019071"
-        ixy="-1.3129E-19"
-        ixz="-4.0555E-18"
-        iyy="0.018314"
-        iyz="2.0111E-20"
-        izz="0.018293" />
+        ixx="0.018293"
+        ixy="-2.8864E-18"
+        ixz="-2.2791E-20"
+        iyy="0.00019071"
+        iyz="1.1001E-19"
+        izz="0.018314" />
     </inertial>
     <visual>
       <origin
@@ -155,35 +155,35 @@
     name="shoulder"
     type="revolute">
     <origin
-      xyz="0 0.11051 0.0285"
-      rpy="-1.5708 0 -1.5708" />
+      xyz="0 0.11311 -0.0285"
+      rpy="-1.3878E-15 1.3878E-15 7.9703E-17" />
     <parent
       link="cart" />
     <child
       link="arm" />
     <axis
-      xyz="0 1 0" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="6"
-      velocity="198" />
+      velocity="3.295" />
   </joint>
   <link
     name="forearm">
     <inertial>
       <origin
-        xyz="0.15861 0.033658 4.431E-17"
+        xyz="1.6424E-16 0.15861 0.035158"
         rpy="0 0 0" />
       <mass
         value="1.2555" />
       <inertia
-        ixx="0.00068775"
-        ixy="-0.0009169"
-        ixz="1.3219E-17"
-        iyy="0.036003"
-        iyz="9.4114E-20"
-        izz="0.036347" />
+        ixx="0.036347"
+        ixy="9.1469E-18"
+        ixz="8.7884E-19"
+        iyy="0.00068775"
+        iyz="-0.0009169"
+        izz="0.036003" />
     </inertial>
     <visual>
       <origin
@@ -213,35 +213,35 @@
     name="elbow"
     type="revolute">
     <origin
-      xyz="-0.35 0.0015 0"
-      rpy="3.1416 -1.2246E-16 3.1416" />
+      xyz="0 0.35 0"
+      rpy="6.9389E-16 -2.0817E-15 -1.4444E-30" />
     <parent
       link="arm" />
     <child
       link="forearm" />
     <axis
-      xyz="0 1 0" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="6"
-      velocity="198" />
+      velocity="3.295" />
   </joint>
   <link
     name="hand">
     <inertial>
       <origin
-        xyz="-0.036943 0.037718 -1.8058E-16"
+        xyz="5.4351E-17 0.036943 0.039218"
         rpy="0 0 0" />
       <mass
         value="0.79174" />
       <inertia
-        ixx="0.0005451"
-        ixy="-0.00014942"
-        ixz="1.8117E-19"
-        iyy="0.00089052"
-        iyz="-7.4805E-19"
-        izz="0.0012079" />
+        ixx="0.0012079"
+        ixy="2.1009E-19"
+        ixz="7.5749E-19"
+        iyy="0.0005451"
+        iyz="0.00014942"
+        izz="0.00089052" />
     </inertial>
     <visual>
       <origin
@@ -271,34 +271,34 @@
     name="wrist"
     type="revolute">
     <origin
-      xyz="0.42501 0.0485 0"
-      rpy="3.1416 1.2246E-16 3.1416" />
+      xyz="0 0.42501 0.0485"
+      rpy="-6.9389E-16 2.0817E-15 0" />
     <parent
       link="forearm" />
     <child
       link="hand" />
     <axis
-      xyz="0 1 0" />
+      xyz="0 0 1" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="6"
-      velocity="198" />
+      velocity="3.295" />
   </joint>
   <link
     name="finger">
     <inertial>
       <origin
-        xyz="0.0017522 -0.02 2.7756E-17"
+        xyz="-1.0164E-17 0.013252 -9.7145E-17"
         rpy="0 0 0" />
       <mass
         value="0.18562" />
       <inertia
-        ixx="4.051E-05"
-        ixy="-2.252E-20"
-        ixz="3.2672E-20"
-        iyy="6.2332E-05"
-        iyz="6.5888E-21"
+        ixx="6.2332E-05"
+        ixy="-2.6264E-20"
+        ixz="-2.6844E-20"
+        iyy="4.051E-05"
+        iyz="-3.3964E-21"
         izz="7.0561E-05" />
     </inertial>
     <visual>
@@ -329,19 +329,19 @@
     name="fingerjoint"
     type="revolute">
     <origin
-      xyz="-0.15461 0.027 -0.02"
-      rpy="-1.5708 -6.123E-17 3.1416" />
+      xyz="0 0.14311 0.0285"
+      rpy="0 -1.3878E-15 0" />
     <parent
       link="hand" />
     <child
       link="finger" />
     <axis
-      xyz="0 -1 0" />
+      xyz="-1 0 0" />
     <limit
       lower="-1.57"
       upper="1.57"
       effort="1.5"
-      velocity="370" />
+      velocity="370.7" />
   </joint>
   
   <joint name="dummy" type="fixed">
@@ -351,7 +351,7 @@
   </joint>
   
   <joint name="tip_joint" type="fixed">
-  	<origin xyz="0.0665 0 0" rpy="1.57 0 0"/>
+  	<origin xyz="0 0.0665 0" rpy="0 0 0"/>
   	<parent link="finger"/>
   	<child link="effector_tip"/>
   </joint>
