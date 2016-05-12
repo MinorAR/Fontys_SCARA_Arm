@@ -1,0 +1,11 @@
+<launch>
+<node
+        name="pcl_capturing"
+        pkg="pcl_capturing"
+        type="pcl_capturing"
+        output="screen"
+        args="input:=/camera/depth/points">
+</node>
+</launch>
+
+
