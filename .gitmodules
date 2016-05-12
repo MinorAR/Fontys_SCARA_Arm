@@ -7,3 +7,6 @@
 [submodule "src/hector_small_arm_common"]
 	path = src/hector_small_arm_common
 	url = https://github.com/tu-darmstadt-ros-pkg/hector_small_arm_common.git
+[submodule "src/--force"]
+	path = src/--force
+	url = https://bitbucket.org/traclabs/trac_ik.git
