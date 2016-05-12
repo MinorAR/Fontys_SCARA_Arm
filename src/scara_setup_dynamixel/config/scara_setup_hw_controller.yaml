@@ -1,3 +1,16 @@
+linear_hw_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_velocity_controller
+        type: JointVelocityController
+    joint_name: linear_hw_joint
+    joint_speed: 0.2
+    motor:
+        id: 1
+        init: 2048
+        min: 0
+        max: 4095
+
 shoulder_hw_controller:
     controller:
         package: dynamixel_controllers

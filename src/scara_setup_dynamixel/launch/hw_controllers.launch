@@ -4,6 +4,7 @@
     <node name="hw_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
           args="--manager=dxl_manager
                 --port scara_setup_port
+                linear_hw_controller
                 shoulder_hw_controller
                 elbow_hw_controller
                 wrist_hw_controller
