@@ -1,10 +1,14 @@
 controller_list:
-  - name: scara_setup/scara_setup_controller
+  - name: scara_setup/scara_arm_controller
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     joints:
-      - linear
       - shoulder
       - elbow
       - wrist
       - fingerjoint
+  - name: scara_setup/scara_linear_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:     
+      - linear
