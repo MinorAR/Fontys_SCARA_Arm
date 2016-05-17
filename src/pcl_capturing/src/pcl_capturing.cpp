@@ -35,8 +35,8 @@ public:
 
     // get transform position of camera
     ros::Time now = ros::Time::now();
-    listener.waitForTransform("/base_link", "/camera_link", now, ros::Duration(3.0));
-    listener.lookupTransform("/base_link", "/camera_link",ros::Time(0), transform);
+    listener.waitForTransform("/world", "/camera_base_link", now, ros::Duration(3.0));
+    listener.lookupTransform("/world", "/camera_base_link",ros::Time(0), transform);
 
     // convert pointcloud2 to pointxyz
     pcl::fromPCLPointCloud2(*input, *cloud_converted);
