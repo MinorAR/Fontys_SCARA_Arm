@@ -113,7 +113,7 @@ void scara_setup::ScaraSetupHWA::write()
 	jnt_pos[1] = jnt_cmd[1];
 	jnt_pos[2] = jnt_cmd[2];
 	jnt_pos[3] = jnt_cmd[3];
-	jnt_pos[4] = jnt_cmd[4];
+	//jnt_pos[4] = jnt_cmd[4];
 	
 	//convert joint commands to actuator commands using transmissions
 	//jnt_to_act.propagate();
