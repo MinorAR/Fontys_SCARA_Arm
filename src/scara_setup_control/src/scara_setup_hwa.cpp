@@ -96,9 +96,9 @@ void scara_setup::ScaraSetupHWA::wristCb(const dynamixel_msgs::JointState::Const
 	jnt_pos[3] = state->current_pos / trans[3];
 }
 
-void scara_setup::ScaraSetupHWA::fingerjointCb(const dynamixel_msgs::JointState::ConstPtr& state)
+void scara_setup::ScaraSetupHWA::fingerjointCb(const std_msgs::Float64::ConstPtr& state)
 {
-	jnt_pos[4] = state->current_pos / trans[4];
+	jnt_pos[4] = state->data / trans[4];
 }
 
 void scara_setup::ScaraSetupHWA::read()
@@ -109,7 +109,7 @@ void scara_setup::ScaraSetupHWA::read()
 void scara_setup::ScaraSetupHWA::write()
 {
 	//bypassing the feedback loop here
-	//jnt_pos[0] = jnt_cmd[0];
+	jnt_pos[0] = jnt_cmd[0];
 	jnt_pos[1] = jnt_cmd[1];
 	jnt_pos[2] = jnt_cmd[2];
 	jnt_pos[3] = jnt_cmd[3];
@@ -120,11 +120,11 @@ void scara_setup::ScaraSetupHWA::write()
 	
 	std_msgs::Float64 msg;
 	
-	act_cmd[0] = jnt_cmd[0] * trans[0];
+	/*act_cmd[0] = jnt_cmd[0] * trans[0];
 	msg.data = act_cmd[0];
 	linear_cmd_pub.publish(msg);
 	
-	/*act_cmd[1] = jnt_cmd[1] * trans[1];
+	act_cmd[1] = jnt_cmd[1] * trans[1];
 	msg.data = act_cmd[1];
 	shoulder_cmd_pub.publish(msg);
 	
@@ -134,11 +134,11 @@ void scara_setup::ScaraSetupHWA::write()
 	
 	act_cmd[3] = jnt_cmd[3] * trans[3];
 	msg.data = act_cmd[3];
-	wrist_cmd_pub.publish(msg);
+	wrist_cmd_pub.publish(msg);*/
 	
 	act_cmd[4] = jnt_cmd[4] * trans[4];
 	msg.data = act_cmd[4];
-	fingerjoint_cmd_pub.publish(msg);*/
+	fingerjoint_cmd_pub.publish(msg);
 }
 
 int main(int argc, char** argv)
