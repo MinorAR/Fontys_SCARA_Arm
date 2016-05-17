@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "pcl_capturing")
+set(pcl_capturing_MAINTAINER "ruud <ruud@todo.todo>")
+set(pcl_capturing_DEPRECATED "")
+set(pcl_capturing_VERSION "0.0.0")
+set(pcl_capturing_BUILD_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all-dev")
+set(pcl_capturing_RUN_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all")
+set(pcl_capturing_BUILDTOOL_DEPENDS "catkin")

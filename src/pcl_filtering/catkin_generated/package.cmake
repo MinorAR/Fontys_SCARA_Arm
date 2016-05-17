@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "pcl_filtering")
+set(pcl_filtering_MAINTAINER "ruud <ruud@todo.todo>")
+set(pcl_filtering_DEPRECATED "")
+set(pcl_filtering_VERSION "0.0.0")
+set(pcl_filtering_BUILD_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all-dev")
+set(pcl_filtering_RUN_DEPENDS "pcl_conversions" "pcl_ros" "roscpp" "sensor_msgs" "libpcl-all")
+set(pcl_filtering_BUILDTOOL_DEPENDS "catkin")

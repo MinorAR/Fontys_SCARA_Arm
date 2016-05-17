@@ -1,0 +1,16 @@
+<launch>
+<node 
+	name="pcl_filtering" 
+	pkg="pcl_filtering" 
+	type="pcl_filtering" 
+	output="screen"
+	args="input:=/pointcloud_captured">
+        <!-- passthrought filter parameters -->
+        <param name="/xmin" value="-1"/>
+        <param name="/xmax" value="1"/>
+        <param name="/ymin" value="-1"/>
+        <param name="/ymax" value="1"/>
+        <param name="/zmin" value="0"/>
+        <param name="/zmax" value="2"/>
+</node>
+</launch>
