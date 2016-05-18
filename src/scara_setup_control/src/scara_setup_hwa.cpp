@@ -80,7 +80,7 @@ scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 	//
 }
 
-void scara_setup::ScaraSetupHWA::linearCb(const std_msgs::Float64::ConstPtr& state)
+void scara_setup::ScaraSetupHWA::linearCb(const std_msgs::Float32::ConstPtr& state)
 {
 	jnt_pos[0] = state->data / trans[0];
 }

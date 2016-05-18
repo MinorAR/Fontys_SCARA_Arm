@@ -35,8 +35,8 @@
 
 	<group unless="$(arg sim)">
 		<!--include file="$(find scara_setup_dynamixel)/launch/hw_controller_manager.launch" />
-		<include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" />
-		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true"/-->
+		<include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" /-->
+		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true"/>
 	</group>
 
 </launch>

@@ -11,6 +11,7 @@
 
 #include <dynamixel_msgs/JointState.h>
 #include <std_msgs/Float64.h>
+#include <std_msgs/Float32.h>
 
 namespace scara_setup {
 	class ScaraSetupHWA: public hardware_interface::RobotHW
@@ -20,7 +21,7 @@ namespace scara_setup {
 		ScaraSetupHWA();
 		~ScaraSetupHWA();
 		
-		void linearCb(const std_msgs::Float64::ConstPtr& state);
+		void linearCb(const std_msgs::Float32::ConstPtr& state);
 		void linearVelCb(const std_msgs::Float64::ConstPtr& state);
 		void shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state);
 		void elbowCb(const dynamixel_msgs::JointState::ConstPtr& state);

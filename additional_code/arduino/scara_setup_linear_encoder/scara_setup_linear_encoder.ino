@@ -1,7 +1,7 @@
 #include <ArduinoHardware.h>
 #include <ros.h>
 
-#include <std_msgs/Float64.h>
+#include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
 
 #include <Encoder.h>
@@ -19,7 +19,7 @@ const byte upperLimitPin = 23;
 volatile bool calibrated = false;
 ros::NodeHandle nh;
 
-std_msgs::Float64 val_msg;
+std_msgs::Float32 val_msg;
 ros::Publisher val_pub("/scara_setup/linear_encoder/value", &val_msg);
 
 std_msgs::Bool cal_msg;
