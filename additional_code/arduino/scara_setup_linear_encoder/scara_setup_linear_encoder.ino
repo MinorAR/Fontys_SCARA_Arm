@@ -49,7 +49,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  val_msg.data = (lin.read() / 1000.0);
+  val_msg.data = (lin.read() / 1000000.0);
   val_pub.publish(&val_msg);
 
   cal_msg.data = calibrated;

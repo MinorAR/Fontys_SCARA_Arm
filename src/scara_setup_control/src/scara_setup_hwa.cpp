@@ -51,7 +51,7 @@ scara_setup::ScaraSetupHWA::ScaraSetupHWA()
    jnt_to_act.registerHandle(transmission_interface::JointToActuatorPositionHandle("wrist_trans_jnt_to_act", &wrist_trans, wrist_actuator_data, wrist_joint_data));*/
    //act_to_jnt.registerHandle(transmission_interface::ActuatorToJointPositionHandle("wrist_trans_act_to_jnt", &wrist_trans, wrist_actuator_data, wrist_joint_data));
    
-   trans[0] = 1.0; //linear, no transmission, this is handled by the velocity control loop
+   trans[0] = -1.0; //linear, no transmission, this is handled by the velocity control loop
    trans[1] = 2.0; //shoulder
    trans[2] = 2.0; //elbow
    trans[3] = 2.0; //<- third joint is the wrist
@@ -72,7 +72,7 @@ scara_setup::ScaraSetupHWA::ScaraSetupHWA()
    wrist_state_sub = n.subscribe("/wrist_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::wristCb, this);
    
    fingerjoint_cmd_pub = n.advertise<std_msgs::Float64>("/fingerjoint_hw_controller/command", 1000);
-   fingerjoint_state_sub = n.subscribe("/scara_setup/linear_encoder/value", 1000, &scara_setup::ScaraSetupHWA::fingerjointCb, this);
+   fingerjoint_state_sub = n.subscribe("/fingerjoint_hw_controller/value", 1000, &scara_setup::ScaraSetupHWA::fingerjointCb, this);
 }
 
 scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
@@ -119,7 +119,7 @@ void scara_setup::ScaraSetupHWA::read()
 void scara_setup::ScaraSetupHWA::write()
 {
 	//bypassing the feedback loop here
-	jnt_pos[0] = jnt_pos[0] + jnt_cmd[0] * 0.02; //approximate integration of the velocity controlled linear joint :)
+	//jnt_pos[0] = jnt_pos[0] + jnt_cmd[0] * 0.02; //approximate integration of the velocity controlled linear joint :)
 	jnt_pos[1] = jnt_cmd[1];
 	jnt_pos[2] = jnt_cmd[2];
 	jnt_pos[3] = jnt_cmd[3];

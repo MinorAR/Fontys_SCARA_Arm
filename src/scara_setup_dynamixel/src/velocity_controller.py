@@ -8,10 +8,13 @@ chain = DxlChain("/dev/ttyUSB0", rate=250000)
 
 motors = chain.get_motor_list()
 
-chain.set_reg(5, "torque_enable", 1)
+chain.set_reg(1, "torque_enable", 1)
 
 def callback(data):
-	command = 80 + abs(round(data.data * 10))
+	command = abs(round(data.data * 10))
+	
+	if command > 5:
+		command = command + 80
 	
 	if command > 1023: 
 		command = 1023
@@ -20,7 +23,7 @@ def callback(data):
 		command = command + 1024
 	
 	#chain.goto(5, command, speed=0, blocking=False)
-	chain.set_reg(5, "moving_speed", command)
+	chain.set_reg(1, "moving_speed", command)
 	print command
 
 def talker():
@@ -33,7 +36,7 @@ def talker():
 	rate = rospy.Rate(50) # 10hz
 	
 	while not rospy.is_shutdown():
-		rawval = chain.get_reg(5, "present_speed")
+		rawval = chain.get_reg(1, "present_speed")
 		
 		if rawval > 1023:
 			val = (rawval - 1023) / 10

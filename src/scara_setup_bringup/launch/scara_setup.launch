@@ -36,7 +36,10 @@
 	<group unless="$(arg sim)">
 		<!--include file="$(find scara_setup_dynamixel)/launch/hw_controller_manager.launch" />
 		<include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" /-->
-		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true"/>
+		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true">
+			<param name="port" value="/dev/ttyACM1"/>
+			<param name="baud" value="115200"/>
+		</node>
 	</group>
 
 </launch>
