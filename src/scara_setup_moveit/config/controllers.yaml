@@ -7,8 +7,4 @@ controller_list:
       - elbow
       - wrist
       - fingerjoint
-  - name: scara_setup/scara_linear_controller
-    action_ns: follow_joint_trajectory
-    type: FollowJointTrajectory
-    joints:     
       - linear

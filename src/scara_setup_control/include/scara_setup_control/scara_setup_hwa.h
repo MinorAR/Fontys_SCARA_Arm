@@ -23,9 +23,9 @@ namespace scara_setup {
 		
 		void linearCb(const std_msgs::Float32::ConstPtr& state);
 		//void linearVelCb(const std_msgs::Float64::ConstPtr& state);
-		void shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state);
-		void elbowCb(const dynamixel_msgs::JointState::ConstPtr& state);
-		void wristCb(const dynamixel_msgs::JointState::ConstPtr& state);
+		void shoulderCb(const std_msgs::Float64::ConstPtr& state);
+		void elbowCb(const std_msgs::Float64::ConstPtr& state);
+		void wristCb(const std_msgs::Float64::ConstPtr& state);
 		void fingerjointCb(const std_msgs::Float64::ConstPtr& state);
 	
 		void read();
