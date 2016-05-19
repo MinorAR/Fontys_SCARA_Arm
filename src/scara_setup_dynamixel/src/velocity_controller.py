@@ -11,15 +11,15 @@ motors = chain.get_motor_list()
 chain.set_reg(1, "torque_enable", 1)
 
 def callback(data):
-	command = abs(round(data.data * 10))
+	command = abs(round(data.data * 25600))
 	
-	if command > 5:
-		command = command + 80
+	#if command > 5:
+	#	command = command + 80
 	
 	if command > 1023: 
 		command = 1023
 	
-	if data.data > 0:
+	if data.data < 0:
 		command = command + 1024
 	
 	#chain.goto(5, command, speed=0, blocking=False)

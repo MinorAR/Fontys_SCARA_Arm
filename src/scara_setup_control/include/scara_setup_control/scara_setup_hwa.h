@@ -22,7 +22,7 @@ namespace scara_setup {
 		~ScaraSetupHWA();
 		
 		void linearCb(const std_msgs::Float32::ConstPtr& state);
-		void linearVelCb(const std_msgs::Float64::ConstPtr& state);
+		//void linearVelCb(const std_msgs::Float64::ConstPtr& state);
 		void shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state);
 		void elbowCb(const dynamixel_msgs::JointState::ConstPtr& state);
 		void wristCb(const dynamixel_msgs::JointState::ConstPtr& state);
@@ -34,7 +34,7 @@ namespace scara_setup {
 	private:
 		hardware_interface::JointStateInterface jnt_state_interface;
 		hardware_interface::PositionJointInterface jnt_pos_interface;
-		hardware_interface::VelocityJointInterface jnt_vel_interface;
+		//hardware_interface::VelocityJointInterface jnt_vel_interface;
 		
 		transmission_interface::JointToActuatorPositionInterface jnt_to_act;
 		transmission_interface::ActuatorToJointPositionInterface act_to_jnt;
@@ -57,7 +57,7 @@ namespace scara_setup {
 		ros::NodeHandle n;
 		ros::Publisher linear_cmd_pub;
 		ros::Subscriber linear_state_sub;
-		ros::Subscriber linear_vel_sub;
+		//ros::Subscriber linear_vel_sub;
 		ros::Publisher shoulder_cmd_pub;
 		ros::Subscriber shoulder_state_sub;
 		ros::Publisher elbow_cmd_pub;
