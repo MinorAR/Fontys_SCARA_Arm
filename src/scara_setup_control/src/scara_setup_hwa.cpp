@@ -76,11 +76,22 @@ scara_setup::ScaraSetupHWA::ScaraSetupHWA()
    
    fingerjoint_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/fingerjoint/command", 1000);
    fingerjoint_state_sub = n.subscribe("/full_hw_controller/fingerjoint/state", 1000, &scara_setup::ScaraSetupHWA::fingerjointCb, this);
+   
+   reset_positions_sub = n.subscribe("/scara_setup/reset_positions", 1000, &scara_setup::ScaraSetupHWA::resetPositionsCb, this);
 }
 
 scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 {
 	//
+}
+
+void scara_setup::ScaraSetupHWA::resetPositionsCb(const std_msgs::Bool::ConstPtr& msg)
+{
+	jnt_cmd[0] = jnt_pos[0];
+	jnt_cmd[1] = jnt_pos[1];
+	jnt_cmd[2] = jnt_pos[2];
+	jnt_cmd[3] = jnt_pos[3];
+	jnt_cmd[4] = jnt_pos[4];
 }
 
 void scara_setup::ScaraSetupHWA::linearCb(const std_msgs::Float32::ConstPtr& state)

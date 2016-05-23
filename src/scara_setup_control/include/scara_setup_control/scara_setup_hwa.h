@@ -12,6 +12,7 @@
 #include <dynamixel_msgs/JointState.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float32.h>
+#include <std_msgs/Bool.h>
 
 namespace scara_setup {
 	class ScaraSetupHWA: public hardware_interface::RobotHW
@@ -27,6 +28,8 @@ namespace scara_setup {
 		void elbowCb(const std_msgs::Float64::ConstPtr& state);
 		void wristCb(const std_msgs::Float64::ConstPtr& state);
 		void fingerjointCb(const std_msgs::Float64::ConstPtr& state);
+		
+		void resetPositionsCb(const std_msgs::Bool::ConstPtr& msg);
 	
 		void read();
 		void write();
@@ -66,6 +69,8 @@ namespace scara_setup {
 		ros::Subscriber wrist_state_sub;
 		ros::Publisher fingerjoint_cmd_pub;
 		ros::Subscriber fingerjoint_state_sub;
+		
+		ros::Subscriber reset_positions_sub;
 	};
 };
 

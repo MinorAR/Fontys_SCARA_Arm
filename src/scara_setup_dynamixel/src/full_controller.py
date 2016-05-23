@@ -2,17 +2,24 @@
 # license removed for brevity
 import rospy
 from std_msgs.msg import Float64
+from std_msgs.msg import Bool
 from dxl.dxlchain import DxlChain
 
 chain = DxlChain("/dev/ttyUSB0", rate=250000)
 
 motors = chain.get_motor_list()
 
-chain.set_reg(1, "torque_enable", 1)
-chain.set_reg(2, "torque_enable", 1)
-chain.set_reg(3, "torque_enable", 1)
-chain.set_reg(4, "torque_enable", 1)
-chain.set_reg(5, "torque_enable", 1)
+def set_excitation(par):
+	if par:
+		val = 1
+	else :
+		val = 0
+	
+	chain.set_reg(1, "torque_enable", val)
+	chain.set_reg(2, "torque_enable", val)
+	chain.set_reg(3, "torque_enable", val)
+	chain.set_reg(4, "torque_enable", val)
+	chain.set_reg(5, "torque_enable", val)
 
 def callback_linear(data):
 	command = abs(round(data.data * 25600))
@@ -27,6 +34,9 @@ def callback_linear(data):
 		command = command + 1024
 	
 	chain.set_reg(1, "moving_speed", command)
+	
+def callback_excitation(data):
+	set_excitation(data.data)
 	
 def callback_shoulder(data):
 	command = 2048 + round(data.data / 0.001533203)
@@ -61,7 +71,11 @@ def talker():
 	fingerjoint_pub = rospy.Publisher("/full_hw_controller/fingerjoint/state", Float64, queue_size=10)
 	rospy.Subscriber("/full_hw_controller/fingerjoint/command", Float64, callback_fingerjoint)
 	
+	rospy.Subscriber("/full_hw_controller/set_excitation", Bool, callback_excitation)
+	
 	rate = rospy.Rate(20) # 10hz
+	
+	set_excitation(false)
 	
 	while not rospy.is_shutdown():
 		rawval = (chain.get_reg(2, "present_position") - 2048) * 0.001533203
