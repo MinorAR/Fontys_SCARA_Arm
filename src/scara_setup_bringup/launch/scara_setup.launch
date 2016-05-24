@@ -34,12 +34,12 @@
 	<include file="$(find scara_setup_moveit)/launch/move_group.launch" />
 
 	<group unless="$(arg sim)">
-		<!--include file="$(find scara_setup_dynamixel)/launch/hw_controller_manager.launch" />
-		<include file="$(find scara_setup_dynamixel)/launch/hw_controllers.launch" /-->
 		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true">
 			<param name="port" value="/dev/ttyACM0"/>
 			<param name="baud" value="115200"/>
 		</node>
+		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py"/>
+		<node name="scara_setup_gui" pkg="scara_setup_bringup" type="scara_setup_gui.py"/>
 	</group>
 
 </launch>

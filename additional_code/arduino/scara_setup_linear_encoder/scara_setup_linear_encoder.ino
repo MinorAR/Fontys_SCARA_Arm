@@ -8,6 +8,7 @@
 
 //Function declarations
 void refCb();
+void resCb(const std_msgs::Bool& msg);
 
 //Pins
 Encoder lin(18, 19);
@@ -31,6 +32,8 @@ ros::Publisher lol_pub("/scara_setup/linear_encoder/lower_limit", &lol_msg);
 std_msgs::Bool upl_msg;
 ros::Publisher upl_pub("/scara_setup/linear_encoder/upper_limit", &upl_msg);
 
+ros::Subscriber<std_msgs::Bool> res_sub("/scara_setup/linear_encoder/reset", &resCb);
+
 void setup() {
   //Set up pins
   pinMode(refPin, INPUT);
@@ -45,6 +48,7 @@ void setup() {
   nh.advertise(cal_pub);
   nh.advertise(lol_pub);
   nh.advertise(upl_pub);
+  nh.subscribe(res_sub);
 }
 
 void loop() {
@@ -84,5 +88,11 @@ void refCb()
   }
 
   calibrated = true;
+}
+
+void resCb(const std_msgs::Bool& msg)
+{
+  lin.write(0);
+  calibrated = false;
 }
 
