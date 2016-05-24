@@ -43,6 +43,25 @@ def callback_linear(data):
 
 	if excitation:
 		chain.set_reg(1, "moving_speed", command)
+		
+def callback_linear_override(data):
+	if data.data == 0.0:
+		chain.set_reg(1, "torque_enable", 0)
+		return
+	
+	chain.set_reg(1, "torque_enable", 1)
+	command = abs(round(data.data * 25600))
+	
+	#if command > 5:
+	#	command = command + 80
+	
+	if command > 1023: 
+		command = 1023
+	
+	if data.data < 0:
+		command = command + 1024
+
+	chain.set_reg(1, "moving_speed", command)
 	
 def callback_excitation(data):
 	set_excitation(data.data)
@@ -75,6 +94,7 @@ def talker():
 	rospy.init_node('full_hw_controller')
 	
 	rospy.Subscriber("/full_hw_controller/linear/command", Float64, callback_linear)
+	rospy.Subscriber("/full_hw_controller/linear/override", Float64, callback_linear_override)
 	
 	shoulder_pub = rospy.Publisher("/full_hw_controller/shoulder/state", Float64, queue_size=10)
 	rospy.Subscriber("/full_hw_controller/shoulder/command", Float64, callback_shoulder)
