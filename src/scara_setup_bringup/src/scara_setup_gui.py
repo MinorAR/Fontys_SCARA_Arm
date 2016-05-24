@@ -15,6 +15,10 @@ class RosPublisher:
 		self.pub_z_override = rospy.Publisher('/full_hw_controller/linear/override', Float64, queue_size=100)
 		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Bool, queue_size=100)
 		
+		rospy.Subscriber('/scara_setup/linear_encoder/calibrated', Bool, self.calibratedCb)
+		rospy.Subscriber('/scara_setup/linear_encoder/lower_limit', Bool, self.lowerLimitCb)
+		rospy.Subscriber('/scara_setup/linear_encoder/upper_limit', Bool, self.upperLimitCb)
+		
 		#Set up visual stuff
 		self.root = Tk()
 		self.root.title("SCARA setup GUI")
@@ -36,6 +40,11 @@ class RosPublisher:
 		self.resetGroup = LabelFrame(self.root, text="Resets", padx=10, pady=10)
 		self.but_reset_enc = Button(self.resetGroup, text="Reset encoder", command = self.resetEncoder)
 		
+		self.infoGroup = LabelFrame(self.root, text="Info", padx=10, pady=10)
+		self.lbl_calibrated = Label(self.infoGroup, text="Encoder calibrated")
+		self.lbl_limit_up = Label(self.infoGroup, text="Upper limit switch")
+		self.lbl_limit_down = Label(self.infoGroup, text="Lower limit switch")
+		
 		self.stateGroup.pack(pady = 10, padx = 10, side = TOP, anchor = NW)
 		self.but_planned.pack(pady = 10, padx = 10, side = LEFT)
 		self.but_manual.pack(pady = 10, padx = 10, side = LEFT)
@@ -46,6 +55,11 @@ class RosPublisher:
 		
 		self.resetGroup.pack(pady = 10, padx = 10, side = TOP, anchor = NW)
 		self.but_reset_enc.pack(pady = 10, padx = 10, side = LEFT)
+		
+		self.infoGroup.pack(pady = 10, padx = 10, side = TOP, anchor = NW)
+		self.lbl_calibrated.pack(pady = 10, padx = 10, side = LEFT)
+		self.lbl_limit_up.pack(pady = 10, padx = 10, side = LEFT)
+		self.lbl_limit_down.pack(pady = 10, padx = 10, side = LEFT)
 		
 		self.but_manual['state'] = 'disabled'
 		
@@ -105,6 +119,25 @@ class RosPublisher:
 	def periodic(self):
 		#do periodic stuff
 		self.root.after(100, self.periodic)
+		
+	# ros callbacks
+	def calibratedCb(self, data):
+		if data.data:
+			self.lbl_calibrated.config(bg='green')
+		else:
+			self.lbl_calibrated.config(bg='red')
+			
+	def lowerLimitCb(self, data):
+		if data.data:
+			self.lbl_limit_down.config(bg='green')
+		else:
+			self.lbl_limit_down.config(bg='red')
+			
+	def upperLimitCb(self, data):
+		if data.data:
+			self.lbl_limit_up.config(bg='green')
+		else:
+			self.lbl_limit_up.config(bg='red')
 		
 pub = RosPublisher()
 
