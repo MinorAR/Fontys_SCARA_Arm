@@ -14,6 +14,8 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
 
+#include <ros/console.h>
+
 namespace scara_setup {
 	class ScaraSetupHWA: public hardware_interface::RobotHW
 	{
@@ -23,7 +25,6 @@ namespace scara_setup {
 		~ScaraSetupHWA();
 		
 		void linearCb(const std_msgs::Float32::ConstPtr& state);
-		//void linearVelCb(const std_msgs::Float64::ConstPtr& state);
 		void shoulderCb(const std_msgs::Float64::ConstPtr& state);
 		void elbowCb(const std_msgs::Float64::ConstPtr& state);
 		void wristCb(const std_msgs::Float64::ConstPtr& state);
@@ -34,16 +35,12 @@ namespace scara_setup {
 		void read();
 		void write();
 		
+		bool getResetSwitch();
+		void clearResetSwitch();
+		
 	private:
 		hardware_interface::JointStateInterface jnt_state_interface;
 		hardware_interface::PositionJointInterface jnt_pos_interface;
-		//hardware_interface::VelocityJointInterface jnt_vel_interface;
-		
-		transmission_interface::JointToActuatorPositionInterface jnt_to_act;
-		transmission_interface::ActuatorToJointPositionInterface act_to_jnt;
-		
-		transmission_interface::ActuatorData wrist_actuator_data;
-		transmission_interface::JointData wrist_joint_data;
 		
 		double jnt_cmd[5];
 		double jnt_pos[5];
@@ -51,16 +48,14 @@ namespace scara_setup {
 		double jnt_eff[5];
 		
 		double act_cmd[5];
-		double act_pos[5];
-		double act_vel[5];
-		double act_eff[5];
 		
 		double trans[5];
+		
+		bool reset_switch;
 		
 		ros::NodeHandle n;
 		ros::Publisher linear_cmd_pub;
 		ros::Subscriber linear_state_sub;
-		//ros::Subscriber linear_vel_sub;
 		ros::Publisher shoulder_cmd_pub;
 		ros::Subscriber shoulder_state_sub;
 		ros::Publisher elbow_cmd_pub;
