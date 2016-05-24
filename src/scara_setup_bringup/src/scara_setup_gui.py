@@ -14,6 +14,7 @@ class RosPublisher:
 		self.pub_reset_pos = rospy.Publisher('/scara_setup/reset_positions', Bool, queue_size=100)
 		self.pub_z_override = rospy.Publisher('/full_hw_controller/linear/override', Float64, queue_size=100)
 		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Bool, queue_size=100)
+		self.pub_cog = rospy.Publisher('/full_hw_controller/cog_linear', Bool, queue_size=100)
 		
 		rospy.Subscriber('/scara_setup/linear_encoder/calibrated', Bool, self.calibratedCb)
 		rospy.Subscriber('/scara_setup/linear_encoder/lower_limit', Bool, self.lowerLimitCb)
@@ -38,6 +39,7 @@ class RosPublisher:
 		self.but_down.bind('<ButtonRelease-1>', self.zDownStop)
 		
 		self.resetGroup = LabelFrame(self.root, text="Resets", padx=10, pady=10)
+		self.but_cog = Button(self.resetGroup, text="Cog linear", command = self.cogLinear)
 		self.but_reset_enc = Button(self.resetGroup, text="Reset encoder", command = self.resetEncoder)
 		
 		self.infoGroup = LabelFrame(self.root, text="Info", padx=10, pady=10)
@@ -54,6 +56,7 @@ class RosPublisher:
 		self.but_down.pack(pady = 10, padx = 10, side = LEFT)
 		
 		self.resetGroup.pack(pady = 10, padx = 10, side = TOP, anchor = NW)
+		self.but_cog.pack(pady = 10, padx = 10, side = LEFT)
 		self.but_reset_enc.pack(pady = 10, padx = 10, side = LEFT)
 		
 		self.infoGroup.pack(pady = 10, padx = 10, side = TOP, anchor = NW)
@@ -75,6 +78,7 @@ class RosPublisher:
 		self.but_up['state'] = 'disabled'
 		self.but_down['state'] = 'disabled'
 		self.but_reset_enc['state'] = 'disabled'
+		self.but_cog['state'] = 'disabled'
 		self.but_manual['state'] = 'normal'
 	
 	def setManual(self):
@@ -84,6 +88,7 @@ class RosPublisher:
 		self.but_up['state'] = 'normal'
 		self.but_down['state'] = 'normal'
 		self.but_reset_enc['state'] = 'normal'
+		self.but_cog['state'] = 'normal'
 		self.but_manual['state'] = 'disabled'
 		
 	def zUpStart(self, event):
@@ -115,6 +120,9 @@ class RosPublisher:
 				return
 				
 		self.pub_reset_enc.publish(Bool(True))
+		
+	def cogLinear(self):
+		self.pub_cog.publish(Bool(True))
 		
 	def periodic(self):
 		#do periodic stuff

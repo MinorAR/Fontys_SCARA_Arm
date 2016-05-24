@@ -12,6 +12,26 @@ motors = chain.get_motor_list()
 excitation = False
 lower_limit = False
 upper_limit = False
+calibrated = False
+
+rospy.init_node('full_hw_controller')
+
+pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Bool, queue_size=100)
+
+def callback_cog_linear(data):
+	callback_linear_override(Float64(-0.4))
+	while lower_limit == False:
+		pass
+	
+	pub_reset_enc.publish(Bool(True))
+
+	rospy.sleep(0.05)
+	
+	callback_linear_override(Float64(0.4))
+	while calibrated == False:
+		pass
+	
+	callback_linear_override(Float64(0.0))
 
 def set_excitation(par):
 	global excitation
@@ -80,6 +100,10 @@ def callback_linear_override(data):
 def callback_excitation(data):
 	set_excitation(data.data)
 	
+def callback_calibrated(data):
+	global calibrated
+	calibrated = data.data
+	
 def callback_lower_limit(data):
 	global lower_limit
 	lower_limit = data.data
@@ -118,9 +142,7 @@ def callback_fingerjoint(data):
 	if excitation:
 		chain.set_reg(5, "goal_pos", command)
 
-def talker():
-	rospy.init_node('full_hw_controller')
-	
+def talker():	
 	rospy.Subscriber("/full_hw_controller/linear/command", Float64, callback_linear)
 	rospy.Subscriber("/full_hw_controller/linear/override", Float64, callback_linear_override)
 	
@@ -141,6 +163,10 @@ def talker():
 	rospy.Subscriber("/scara_setup/linear_encoder/lower_limit", Bool, callback_lower_limit)
 	
 	rospy.Subscriber("/scara_setup/linear_encoder/upper_limit", Bool, callback_upper_limit)
+	
+	rospy.Subscriber("/scara_setup/linear_encoder/calibrated", Bool, callback_calibrated)
+	
+	rospy.Subscriber("/full_hw_controller/cog_linear", Bool, callback_cog_linear)
 	
 	rate = rospy.Rate(20) # 10hz
 	
