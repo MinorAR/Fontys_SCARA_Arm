@@ -97,6 +97,9 @@ class RosPublisher:
 		self.pub_z_override.publish(Float64(0.0))
 		
 	def resetEncoder(self):
+		if self.but_reset_enc['state'] == 'disabled':
+				return
+				
 		self.pub_reset_enc.publish(Bool(True))
 		
 	def periodic(self):
