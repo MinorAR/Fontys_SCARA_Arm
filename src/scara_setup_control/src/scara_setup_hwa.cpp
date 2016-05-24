@@ -2,6 +2,14 @@
 
 scara_setup::ScaraSetupHWA::ScaraSetupHWA()
 {
+	trans[0] = 1.0; //linear, no transmission, this is handled by the velocity control loop
+   trans[1] = 2.0; //shoulder
+   trans[2] = -2.0; //elbow
+   trans[3] = -2.0; //<- third joint is the wrist
+   trans[4] = -1.0; //fingerjoint	
+   
+   reset_switch = false;
+	
 	// connect and register the joint state interface
 	hardware_interface::JointStateHandle state_handle_linear("linear", &jnt_pos[0], &jnt_vel[0], &jnt_eff[0]);
    jnt_state_interface.registerHandle(state_handle_linear);
@@ -19,14 +27,11 @@ scara_setup::ScaraSetupHWA::ScaraSetupHWA()
    jnt_state_interface.registerHandle(state_handle_fingerjoint);
 
    registerInterface(&jnt_state_interface);
-
-    // connect and register velocity interface for the linear joint
-   hardware_interface::JointHandle vel_handle_linear(jnt_state_interface.getHandle("linear"), &jnt_cmd[0]);
-   jnt_vel_interface.registerHandle(vel_handle_linear);
    
-   registerInterface(&jnt_vel_interface);
-	
-	// connect and register the joint position interface  
+   // connect and register the joint position interface  
+   hardware_interface::JointHandle pos_handle_linear(jnt_state_interface.getHandle("linear"), &jnt_cmd[0]);
+   jnt_pos_interface.registerHandle(pos_handle_linear);
+   
    hardware_interface::JointHandle pos_handle_shoulder(jnt_state_interface.getHandle("shoulder"), &jnt_cmd[1]);
    jnt_pos_interface.registerHandle(pos_handle_shoulder);
    
@@ -41,38 +46,23 @@ scara_setup::ScaraSetupHWA::ScaraSetupHWA()
 
    registerInterface(&jnt_pos_interface);
    
-   // connect and register transmissions
-   /*transmission_interface::SimpleTransmission wrist_trans(2.0);
-
-   wrist_actuator_data.position.push_back(&act_cmd[3]);
-   
-   wrist_joint_data.position.push_back(&jnt_cmd[3]);
-   
-   jnt_to_act.registerHandle(transmission_interface::JointToActuatorPositionHandle("wrist_trans_jnt_to_act", &wrist_trans, wrist_actuator_data, wrist_joint_data));*/
-   //act_to_jnt.registerHandle(transmission_interface::ActuatorToJointPositionHandle("wrist_trans_act_to_jnt", &wrist_trans, wrist_actuator_data, wrist_joint_data));
-   
-   trans[0] = 1.0; //linear, no transmission, this is handled by the velocity control loop
-   trans[1] = 2.0; //shoulder
-   trans[2] = 2.0; //elbow
-   trans[3] = 2.0; //<- third joint is the wrist
-   trans[4] = 1.0; //fingerjoint
-   
    //set up the publishers & listeners
-   linear_cmd_pub = n.advertise<std_msgs::Float64>("/linear_hw_controller/command", 1000);
+   linear_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/linear/command", 1000);
    linear_state_sub = n.subscribe("/scara_setup/linear_encoder/value", 1000, &scara_setup::ScaraSetupHWA::linearCb, this);
-   linear_vel_sub = n.subscribe("/linear_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::linearVelCb, this);
    
-   shoulder_cmd_pub = n.advertise<std_msgs::Float64>("/shoulder_hw_controller/command", 1000);
-   shoulder_state_sub = n.subscribe("/shoulder_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::shoulderCb, this);
+   shoulder_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/shoulder/command", 1000);
+   shoulder_state_sub = n.subscribe("/full_hw_controller/shoulder/state", 1000, &scara_setup::ScaraSetupHWA::shoulderCb, this);
    
-   elbow_cmd_pub = n.advertise<std_msgs::Float64>("/elbow_hw_controller/command", 1000);
-   elbow_state_sub = n.subscribe("/elbow_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::elbowCb, this);
+   elbow_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/elbow/command", 1000);
+   elbow_state_sub = n.subscribe("/full_hw_controller/elbow/state", 1000, &scara_setup::ScaraSetupHWA::elbowCb, this);
    
-   wrist_cmd_pub = n.advertise<std_msgs::Float64>("/wrist_hw_controller/command", 1000);
-   wrist_state_sub = n.subscribe("/wrist_hw_controller/state", 1000, &scara_setup::ScaraSetupHWA::wristCb, this);
+   wrist_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/wrist/command", 1000);
+   wrist_state_sub = n.subscribe("/full_hw_controller/wrist/state", 1000, &scara_setup::ScaraSetupHWA::wristCb, this);
    
-   fingerjoint_cmd_pub = n.advertise<std_msgs::Float64>("/fingerjoint_hw_controller/command", 1000);
-   fingerjoint_state_sub = n.subscribe("/scara_setup/linear_encoder/value", 1000, &scara_setup::ScaraSetupHWA::fingerjointCb, this);
+   fingerjoint_cmd_pub = n.advertise<std_msgs::Float64>("/full_hw_controller/fingerjoint/command", 1000);
+   fingerjoint_state_sub = n.subscribe("/full_hw_controller/fingerjoint/state", 1000, &scara_setup::ScaraSetupHWA::fingerjointCb, this);
+   
+   reset_positions_sub = n.subscribe("/scara_setup/reset_positions", 1000, &scara_setup::ScaraSetupHWA::resetPositionsCb, this);
 }
 
 scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
@@ -80,30 +70,39 @@ scara_setup::ScaraSetupHWA::~ScaraSetupHWA()
 	//
 }
 
+bool scara_setup::ScaraSetupHWA::getResetSwitch()
+{
+	return reset_switch;
+}
+
+void scara_setup::ScaraSetupHWA::clearResetSwitch()
+{
+	reset_switch = false;
+}
+
+void scara_setup::ScaraSetupHWA::resetPositionsCb(const std_msgs::Bool::ConstPtr& msg)
+{
+	reset_switch = true;
+}
+
 void scara_setup::ScaraSetupHWA::linearCb(const std_msgs::Float32::ConstPtr& state)
 {
 	jnt_pos[0] = state->data / trans[0];
 }
 
-void scara_setup::ScaraSetupHWA::linearVelCb(const std_msgs::Float64::ConstPtr& state)
+void scara_setup::ScaraSetupHWA::shoulderCb(const std_msgs::Float64::ConstPtr& state)
 {
-	jnt_vel[0] = state->data / trans[0];
+	jnt_pos[1] = state->data / trans[1];
 }
 
-
-void scara_setup::ScaraSetupHWA::shoulderCb(const dynamixel_msgs::JointState::ConstPtr& state)
+void scara_setup::ScaraSetupHWA::elbowCb(const std_msgs::Float64::ConstPtr& state)
 {
-	jnt_pos[1] = state->current_pos / trans[1];
+	jnt_pos[2] = state->data / trans[2];
 }
 
-void scara_setup::ScaraSetupHWA::elbowCb(const dynamixel_msgs::JointState::ConstPtr& state)
+void scara_setup::ScaraSetupHWA::wristCb(const std_msgs::Float64::ConstPtr& state)
 {
-	jnt_pos[2] = state->current_pos / trans[2];
-}
-
-void scara_setup::ScaraSetupHWA::wristCb(const dynamixel_msgs::JointState::ConstPtr& state)
-{
-	jnt_pos[3] = state->current_pos / trans[3];
+	jnt_pos[3] = state->data / trans[3];
 }
 
 void scara_setup::ScaraSetupHWA::fingerjointCb(const std_msgs::Float64::ConstPtr& state)
@@ -119,19 +118,16 @@ void scara_setup::ScaraSetupHWA::read()
 void scara_setup::ScaraSetupHWA::write()
 {
 	//bypassing the feedback loop here
-	jnt_pos[0] = jnt_pos[0] + jnt_cmd[0] * 0.02; //approximate integration of the velocity controlled linear joint :)
-	jnt_pos[1] = jnt_cmd[1];
-	jnt_pos[2] = jnt_cmd[2];
-	jnt_pos[3] = jnt_cmd[3];
-	jnt_pos[4] = jnt_cmd[4];
-	
-	//convert joint commands to actuator commands using transmissions
-	//jnt_to_act.propagate();
+	//jnt_pos[0] = jnt_pos[0] + jnt_cmd[0] * 0.02; //approximate integration of the velocity controlled linear joint :)
+	//jnt_pos[1] = jnt_cmd[1];
+	//jnt_pos[2] = jnt_cmd[2];
+	//jnt_pos[3] = jnt_cmd[3];
+	//jnt_pos[4] = jnt_cmd[4];
 	
 	std_msgs::Float64 msg;
 	
 	act_cmd[0] = jnt_cmd[0] * trans[0];
-	msg.data = act_cmd[0];
+	msg.data = act_cmd[0] - jnt_pos[0];
 	linear_cmd_pub.publish(msg);
 	
 	act_cmd[1] = jnt_cmd[1] * trans[1];
@@ -162,7 +158,7 @@ int main(int argc, char** argv)
 	ros::AsyncSpinner spinner(4);
    spinner.start();
 
-	ros::Rate loop_rate(50);
+	ros::Rate loop_rate(20);
 
 	ros::Time lt = ros::Time::now();
 
@@ -173,7 +169,8 @@ int main(int argc, char** argv)
 		lt = ct;
 		
 		//robot.read(); <- hw pos constantly updated by the callbacks
-		cm.update(ct, et);
+		cm.update(ct, et, robot.getResetSwitch());
+		robot.clearResetSwitch();
 		robot.write();
 		
 		loop_rate.sleep();
