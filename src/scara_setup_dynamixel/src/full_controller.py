@@ -10,6 +10,8 @@ chain = DxlChain("/dev/ttyUSB0", rate=250000)
 motors = chain.get_motor_list()
 
 excitation = False
+lower_limit = False
+upper_limit = False
 
 def set_excitation(par):
 	global excitation
@@ -40,6 +42,12 @@ def callback_linear(data):
 	
 	if data.data < 0:
 		command = command + 1024
+		
+	if lower_limit and (data.data < 0.0):
+		return
+		
+	if upper_limit and (data.data > 0.0):
+		return
 
 	if excitation:
 		chain.set_reg(1, "moving_speed", command)
@@ -60,11 +68,31 @@ def callback_linear_override(data):
 	
 	if data.data < 0:
 		command = command + 1024
-
+	
+	if lower_limit and (data.data < 0.0):
+		return
+		
+	if upper_limit and (data.data > 0.0):
+		return
+	
 	chain.set_reg(1, "moving_speed", command)
 	
 def callback_excitation(data):
 	set_excitation(data.data)
+	
+def callback_lower_limit(data):
+	global lower_limit
+	lower_limit = data.data
+	
+	if lower_limit and chain.get_reg(1, "present_speed") > 1024:
+		chain.set_reg(1, "moving_speed", 0)
+	
+def callback_upper_limit(data):
+	global upper_limit
+	upper_limit = data.data
+	
+	if upper_limit and chain.get_reg(1, "present_speed") < 1024:
+		chain.set_reg(1, "moving_speed", 0)
 	
 def callback_shoulder(data):
 	command = 2048 + round(data.data / 0.001533203)
@@ -109,6 +137,10 @@ def talker():
 	rospy.Subscriber("/full_hw_controller/fingerjoint/command", Float64, callback_fingerjoint)
 	
 	rospy.Subscriber("/full_hw_controller/set_excitation", Bool, callback_excitation)
+	
+	rospy.Subscriber("/scara_setup/linear_encoder/lower_limit", Bool, callback_lower_limit)
+	
+	rospy.Subscriber("/scara_setup/linear_encoder/upper_limit", Bool, callback_upper_limit)
 	
 	rate = rospy.Rate(20) # 10hz
 	
