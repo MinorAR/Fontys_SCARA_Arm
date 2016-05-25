@@ -35,42 +35,42 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ruud/catkin_ws/src/pcl_capturing
+CMAKE_SOURCE_DIR = /home/ruud/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ruud/catkin_ws/src/pcl_capturing
+CMAKE_BINARY_DIR = /home/ruud/catkin_ws/src
 
 # Include any dependencies generated for this target.
-include CMakeFiles/pcl_capturing.dir/depend.make
+include pcl_capturing/CMakeFiles/pcl_capturing.dir/depend.make
 
 # Include the progress variables for this target.
-include CMakeFiles/pcl_capturing.dir/progress.make
+include pcl_capturing/CMakeFiles/pcl_capturing.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include CMakeFiles/pcl_capturing.dir/flags.make
+include pcl_capturing/CMakeFiles/pcl_capturing.dir/flags.make
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o: CMakeFiles/pcl_capturing.dir/flags.make
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o: src/pcl_capturing.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ruud/catkin_ws/src/pcl_capturing/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o -c /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o: pcl_capturing/CMakeFiles/pcl_capturing.dir/flags.make
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o: pcl_capturing/src/pcl_capturing.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ruud/catkin_ws/src/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o"
+	cd /home/ruud/catkin_ws/src/pcl_capturing && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o -c /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.i: cmake_force
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp > CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.i
+	cd /home/ruud/catkin_ws/src/pcl_capturing && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp > CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.i
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.s: cmake_force
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp -o CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.s
+	cd /home/ruud/catkin_ws/src/pcl_capturing && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ruud/catkin_ws/src/pcl_capturing/src/pcl_capturing.cpp -o CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.s
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires:
-.PHONY : CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires:
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides: CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
-	$(MAKE) -f CMakeFiles/pcl_capturing.dir/build.make CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides.build
-.PHONY : CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides: pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
+	$(MAKE) -f pcl_capturing/CMakeFiles/pcl_capturing.dir/build.make pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides.build
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides
 
-CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides.build: CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o
+pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.provides.build: pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o
 
 # Object files for target pcl_capturing
 pcl_capturing_OBJECTS = \
@@ -79,8 +79,8 @@ pcl_capturing_OBJECTS = \
 # External object files for target pcl_capturing
 pcl_capturing_EXTERNAL_OBJECTS =
 
-devel/lib/pcl_capturing/pcl_capturing: CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o
-devel/lib/pcl_capturing/pcl_capturing: CMakeFiles/pcl_capturing.dir/build.make
+devel/lib/pcl_capturing/pcl_capturing: pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o
+devel/lib/pcl_capturing/pcl_capturing: pcl_capturing/CMakeFiles/pcl_capturing.dir/build.make
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libpcl_ros_filters.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libpcl_ros_io.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libpcl_ros_tf.so
@@ -102,7 +102,6 @@ devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libpcl_surface.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libpcl_people.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libpcl_tracking.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libpcl_apps.so
-devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libqhull.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libOpenNI.so
@@ -115,11 +114,6 @@ devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libdynamic_reconfigur
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libnodeletlib.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libbondcpp.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libuuid.so
-devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libtinyxml.so
-devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libclass_loader.so
-devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libPocoFoundation.so
-devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libdl.so
-devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libroslib.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librosbag.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librosbag_storage.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
@@ -129,8 +123,68 @@ devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libtopic_tools.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libtf.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libtf2_ros.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libactionlib.so
-devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmessage_filters.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libtf2.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_common_planning_interface_objects.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_scene_interface.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_move_group_interface.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_warehouse.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libwarehouse_ros.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_pick_place_planner.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_move_group_capabilities_base.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_rdf_loader.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_kinematics_plugin_loader.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_robot_model_loader.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_constraint_sampler_manager_loader.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_pipeline.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_trajectory_execution_manager.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_plan_execution.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_scene_monitor.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_lazy_free_space_updater.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_point_containment_filter.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_occupancy_map_monitor.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_pointcloud_octomap_updater_core.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_semantic_world.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_exceptions.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_background_processing.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_kinematics_base.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_robot_model.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_transforms.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_robot_state.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_robot_trajectory.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_interface.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_collision_detection.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_collision_detection_fcl.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_kinematic_constraints.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_scene.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_constraint_samplers.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_planning_request_adapter.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_profiler.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_trajectory_processing.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_distance_field.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_kinematics_metrics.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmoveit_dynamics_solver.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libgeometric_shapes.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/liboctomap.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/liboctomath.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libeigen_conversions.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librandom_numbers.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libkdl_parser.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/liborocos-kdl.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/liborocos-kdl.so.1.3.0
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/liburdf.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/liburdfdom_sensor.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/liburdfdom_model_state.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/liburdfdom_model.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/liburdfdom_world.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librosconsole_bridge.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libsrdfdom.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libimage_transport.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libmessage_filters.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libtinyxml.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libclass_loader.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/libPocoFoundation.so
+devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libdl.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libroscpp.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_signals.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
@@ -140,6 +194,7 @@ devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librosconsole_backend
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/liblog4cxx.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libxmlrpcpp.so
+devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libroslib.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/libroscpp_serialization.so
 devel/lib/pcl_capturing/pcl_capturing: /opt/ros/indigo/lib/librostime.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
@@ -148,22 +203,22 @@ devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_system
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libboost_thread.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libpthread.so
 devel/lib/pcl_capturing/pcl_capturing: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
-devel/lib/pcl_capturing/pcl_capturing: CMakeFiles/pcl_capturing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable devel/lib/pcl_capturing/pcl_capturing"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pcl_capturing.dir/link.txt --verbose=$(VERBOSE)
+devel/lib/pcl_capturing/pcl_capturing: pcl_capturing/CMakeFiles/pcl_capturing.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../devel/lib/pcl_capturing/pcl_capturing"
+	cd /home/ruud/catkin_ws/src/pcl_capturing && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pcl_capturing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/pcl_capturing.dir/build: devel/lib/pcl_capturing/pcl_capturing
-.PHONY : CMakeFiles/pcl_capturing.dir/build
+pcl_capturing/CMakeFiles/pcl_capturing.dir/build: devel/lib/pcl_capturing/pcl_capturing
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/build
 
-CMakeFiles/pcl_capturing.dir/requires: CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
-.PHONY : CMakeFiles/pcl_capturing.dir/requires
+pcl_capturing/CMakeFiles/pcl_capturing.dir/requires: pcl_capturing/CMakeFiles/pcl_capturing.dir/src/pcl_capturing.cpp.o.requires
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/requires
 
-CMakeFiles/pcl_capturing.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/pcl_capturing.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/pcl_capturing.dir/clean
+pcl_capturing/CMakeFiles/pcl_capturing.dir/clean:
+	cd /home/ruud/catkin_ws/src/pcl_capturing && $(CMAKE_COMMAND) -P CMakeFiles/pcl_capturing.dir/cmake_clean.cmake
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/clean
 
-CMakeFiles/pcl_capturing.dir/depend:
-	cd /home/ruud/catkin_ws/src/pcl_capturing && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing/CMakeFiles/pcl_capturing.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/pcl_capturing.dir/depend
+pcl_capturing/CMakeFiles/pcl_capturing.dir/depend:
+	cd /home/ruud/catkin_ws/src && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/catkin_ws/src /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing/CMakeFiles/pcl_capturing.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : pcl_capturing/CMakeFiles/pcl_capturing.dir/depend
 

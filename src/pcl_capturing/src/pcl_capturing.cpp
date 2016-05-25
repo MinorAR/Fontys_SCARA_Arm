@@ -12,7 +12,6 @@
 // passthrough filter
 #include <iostream>
 #include <pcl/filters/passthrough.h>
-//move it
 
 //global for merged cloud
 pcl::PointCloud<pcl::PointXYZ> cloud_merged;
@@ -32,11 +31,12 @@ public:
   void callback(const pcl::PCLPointCloud2ConstPtr& input)
   {
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_converted (new pcl::PointCloud<pcl::PointXYZ>);
-
+    std::cerr << "callback" << std::endl;
     // get transform position of camera
     ros::Time now = ros::Time::now();
-    listener.waitForTransform("/world", "/camera_base_link", now, ros::Duration(3.0));
-    listener.lookupTransform("/world", "/camera_base_link",ros::Time(0), transform);
+    //listener.waitForTransform("/camera_link", "/world", now, ros::Duration(5.0));
+    //listener.lookupTransform("/camera_link", "/world",ros::Time(0), transform);
+    //transform.setRotation( tf::createQuaternionFromRPY(0,0,0) ); 
 
     // convert pointcloud2 to pointxyz
     pcl::fromPCLPointCloud2(*input, *cloud_converted);
@@ -51,7 +51,7 @@ public:
     pass_through_filter.setFilterLimits (0,3);
     pass_through_filter.filter (cloud_pass);
     // transform pointcloud
-    pcl_ros::transformPointCloud (cloud_pass , cloud_tf, transform);
+    pcl_ros::transformPointCloud ("/camera_link", cloud_pass , cloud_tf, listener);
     // merge pointcloud
     if (cloud_merged.points.size () == 0)
     {
@@ -74,7 +74,7 @@ public:
     count++;
     // shutdown thread
 
-    if (count < 5)
+    if (count < 4)
     {
     	ros::param::set("/pcl_capturing/finished", false);
 	ros::shutdown();
@@ -93,13 +93,12 @@ private:
   ros::Publisher pub_;
   ros::Subscriber sub_;
 
-
   // callback function
   pcl::PointCloud<pcl::PointXYZ> cloud_pass, cloud_tf;
   pcl::PassThrough<pcl::PointXYZ> pass_through_filter;
   // transform function
   tf::TransformListener listener;
-  tf::StampedTransform transform;
+  //tf::StampedTransform transform;
 
 };//End of class
 
@@ -107,21 +106,23 @@ int main(int argc, char **argv)
 {
   //Initiate ROS
   ros::init(argc, argv, "pointcloud_capturing");
+//  ros::NodeHandle n_;
   ros::MultiThreadedSpinner spinner(4); // Use 4 threads
+
   std::cerr << "start pcl_capturing" << std::endl;
-  for (int i = 1; i < 5; i++)
+  for (int i = 0; i < 4; i++)
   {
   	std::cerr << "Move to goal: " << i << std::endl;
-  	// move to goal
-  	sleep(1);
-  	//Create an object of class PCL_capturing that will take care of everything
-  	PCL_capturing Object;
+	// move to goal
+	sleep(10.0);
+	//Create an object of class PCL_capturing that will take care of everything
+        PCL_capturing Object;
   	spinner.spin();
   }
   while (ros::ok())
-{
-  ros::spinOnce();
-}
+	{
+  		ros::spinOnce();
+	}
  //ros::waitForShutdown();
 }
 

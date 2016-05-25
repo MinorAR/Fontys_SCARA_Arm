@@ -68,7 +68,7 @@ set(pcl_capturing_CONFIG_INCLUDED TRUE)
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
   set(pcl_capturing_SOURCE_PREFIX /home/ruud/catkin_ws/src/pcl_capturing)
-  set(pcl_capturing_DEVEL_PREFIX /home/ruud/catkin_ws/src/pcl_capturing/devel)
+  set(pcl_capturing_DEVEL_PREFIX /home/ruud/catkin_ws/src/devel)
   set(pcl_capturing_INSTALL_PREFIX "")
   set(pcl_capturing_PREFIX ${pcl_capturing_DEVEL_PREFIX})
 else()

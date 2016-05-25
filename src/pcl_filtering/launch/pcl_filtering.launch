@@ -6,10 +6,10 @@
 	output="screen"
 	args="input:=/pointcloud_captured">
         <!-- passthrought filter parameters -->
-        <param name="/xmin" value="-1"/>
-        <param name="/xmax" value="1"/>
-        <param name="/ymin" value="-1"/>
-        <param name="/ymax" value="1"/>
+        <param name="/xmin" value="-2"/>
+        <param name="/xmax" value="2"/>
+        <param name="/ymin" value="-2"/>
+        <param name="/ymax" value="2"/>
         <param name="/zmin" value="0"/>
         <param name="/zmax" value="2"/>
 </node>
