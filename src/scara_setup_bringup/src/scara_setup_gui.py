@@ -3,6 +3,7 @@ import rospy
 from Tkinter import *
 from std_msgs.msg import Bool
 from std_msgs.msg import Float64
+from std_msgs.msg import Empty
 
 class RosPublisher:
 	def __init__(self):
@@ -11,10 +12,10 @@ class RosPublisher:
 		#Set up ROS stuff
 		rospy.init_node('scara_setup_gui', anonymous=False)
 		self.pub_excitation = rospy.Publisher('/full_hw_controller/set_excitation', Bool, queue_size=100)
-		self.pub_reset_pos = rospy.Publisher('/scara_setup/reset_positions', Bool, queue_size=100)
+		self.pub_reset_pos = rospy.Publisher('/scara_setup/reset_positions', Empty, queue_size=100)
 		self.pub_z_override = rospy.Publisher('/full_hw_controller/linear/override', Float64, queue_size=100)
-		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Bool, queue_size=100)
-		self.pub_cog = rospy.Publisher('/full_hw_controller/cog_linear', Bool, queue_size=100)
+		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Empty, queue_size=100)
+		self.pub_cog = rospy.Publisher('/full_hw_controller/cog_linear', Empty, queue_size=100)
 		
 		rospy.Subscriber('/scara_setup/linear_encoder/calibrated', Bool, self.calibratedCb)
 		rospy.Subscriber('/scara_setup/linear_encoder/lower_limit', Bool, self.lowerLimitCb)
@@ -71,7 +72,7 @@ class RosPublisher:
 	
 	#Button callbacks		
 	def setPlanned(self):
-		self.pub_reset_pos.publish(Bool(True))
+		self.pub_reset_pos.publish(Empty())
 		self.pub_excitation.publish(Bool(True))
 		
 		self.but_planned['state'] = 'disabled'
@@ -119,10 +120,10 @@ class RosPublisher:
 		if self.but_reset_enc['state'] == 'disabled':
 				return
 				
-		self.pub_reset_enc.publish(Bool(True))
+		self.pub_reset_enc.publish(Empty())
 		
 	def cogLinear(self):
-		self.pub_cog.publish(Bool(True))
+		self.pub_cog.publish(Empty())
 		
 	def periodic(self):
 		#do periodic stuff

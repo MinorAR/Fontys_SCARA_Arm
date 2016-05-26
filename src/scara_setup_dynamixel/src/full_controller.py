@@ -4,6 +4,7 @@ import rospy
 
 from std_msgs.msg import Float64
 from std_msgs.msg import Bool
+from std_msgs.msg import Empty
 from dxl.dxlchain import DxlChain
 
 class HWCoupling:
@@ -19,7 +20,7 @@ class HWCoupling:
 		
 		self.motors = self.chain.get_motor_list()
 		
-		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Bool, queue_size=100)
+		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Empty, queue_size=100)
 		
 		rospy.Subscriber("/full_hw_controller/linear/command", Float64, self.callback_linear)
 		rospy.Subscriber("/full_hw_controller/linear/override", Float64, self.callback_linear_override)
@@ -44,7 +45,7 @@ class HWCoupling:
 	
 		rospy.Subscriber("/scara_setup/linear_encoder/calibrated", Bool, self.callback_calibrated)
 	
-		rospy.Subscriber("/full_hw_controller/cog_linear", Bool, self.callback_cog_linear)
+		rospy.Subscriber("/full_hw_controller/cog_linear", Empty, self.callback_cog_linear)
 	
 		self.rate = rospy.Rate(20) # 10hz
 	

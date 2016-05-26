@@ -12,6 +12,7 @@
 #include <dynamixel_msgs/JointState.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float32.h>
+#include <std_msgs/Empty.h>
 #include <std_msgs/Bool.h>
 
 #include <ros/console.h>
@@ -30,7 +31,7 @@ namespace scara_setup {
 		void wristCb(const std_msgs::Float64::ConstPtr& state);
 		void fingerjointCb(const std_msgs::Float64::ConstPtr& state);
 		
-		void resetPositionsCb(const std_msgs::Bool::ConstPtr& msg);
+		void resetPositionsCb(const std_msgs::Empty::ConstPtr& msg);
 	
 		void read();
 		void write();
