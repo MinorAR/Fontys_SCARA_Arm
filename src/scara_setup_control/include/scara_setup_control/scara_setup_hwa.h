@@ -6,9 +6,6 @@
 #include <hardware_interface/robot_hw.h>
 #include <controller_manager/controller_manager.h>
 
-#include <transmission_interface/simple_transmission.h>
-#include <transmission_interface/transmission_interface.h>
-
 #include <dynamixel_msgs/JointState.h>
 #include <std_msgs/Float64.h>
 #include <std_msgs/Float32.h>
