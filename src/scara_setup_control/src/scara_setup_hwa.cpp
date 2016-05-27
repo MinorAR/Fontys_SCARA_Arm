@@ -80,7 +80,7 @@ void scara_setup::ScaraSetupHWA::clearResetSwitch()
 	reset_switch = false;
 }
 
-void scara_setup::ScaraSetupHWA::resetPositionsCb(const std_msgs::Bool::ConstPtr& msg)
+void scara_setup::ScaraSetupHWA::resetPositionsCb(const std_msgs::Empty::ConstPtr& msg)
 {
 	reset_switch = true;
 }

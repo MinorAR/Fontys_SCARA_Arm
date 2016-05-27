@@ -3,12 +3,13 @@
 
 #include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
+#include <std_msgs/Empty.h>
 
 #include <Encoder.h>
 
 //Function declarations
 void refCb();
-void resCb(const std_msgs::Bool& msg);
+void resCb(const std_msgs::Empty& msg);
 
 //Pins
 Encoder lin(18, 19);
@@ -32,7 +33,7 @@ ros::Publisher lol_pub("/scara_setup/linear_encoder/lower_limit", &lol_msg);
 std_msgs::Bool upl_msg;
 ros::Publisher upl_pub("/scara_setup/linear_encoder/upper_limit", &upl_msg);
 
-ros::Subscriber<std_msgs::Bool> res_sub("/scara_setup/linear_encoder/reset", &resCb);
+ros::Subscriber<std_msgs::Empty> res_sub("/scara_setup/linear_encoder/reset", &resCb);
 
 void setup() {
   //Set up pins
@@ -90,7 +91,7 @@ void refCb()
   calibrated = true;
 }
 
-void resCb(const std_msgs::Bool& msg)
+void resCb(const std_msgs::Empty& msg)
 {
   lin.write(0);
   calibrated = false;
