@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: pclcaptureing_positioning
+Description: Description of pclcaptureing_positioning
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 
