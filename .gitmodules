@@ -16,3 +16,6 @@
 [submodule "src/dynamixel_hr_ros"]
 	path = src/dynamixel_hr_ros
 	url = https://github.com/HumaRobotics/dynamixel_hr_ros.git
+[submodule "additional_code/DynamixelSDK"]
+	path = additional_code/DynamixelSDK
+	url = https://github.com/ROBOTIS-GIT/DynamixelSDK.git
