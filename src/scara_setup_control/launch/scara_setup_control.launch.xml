@@ -1,0 +1,21 @@
+<launch>
+
+<node name="scara_setup_hwa" pkg="scara_setup_control" type="scara_setup_hwa" respawn="false" ns="/scara_setup" />
+
+<!-- Load the joint state controller for the robot -->
+<rosparam file="$(find scara_setup_control)/config/scara_setup_joint_state_controller.yaml" command="load"/>
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" 
+    	output="screen" ns="/scara_setup" args="joint_state_controller" />
+
+<!-- Load the arm controller and subsequent joint controllers -->
+ <rosparam file="$(find scara_setup_control)/config/scara_setup_joint_trajectory_controller.yaml" command="load"/>
+    <node name="joint_trajectory_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" 
+    	output="screen" ns="/scara_setup" args="scara_arm_controller" />
+
+  <!-- Start robot state publisher convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/scara_setup/joint_states" />
+  </node>
+
+</launch>

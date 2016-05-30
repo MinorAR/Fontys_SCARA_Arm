@@ -1,0 +1,48 @@
+<launch>
+	<!-- these are the arguments you can pass this launch file, for example paused:=true -->
+	<arg name="paused" default="false"/>
+	<arg name="use_sim_time" default="true"/>
+	<arg name="gui" default="true"/>
+	<arg name="headless" default="false"/>
+	<arg name="debug" default="false"/>
+	<arg name="sim" default="false"/>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg sim)">
+		<arg name="debug" value="$(arg debug)" />
+		<arg name="gui" value="$(arg gui)" />
+		<arg name="paused" value="$(arg paused)"/>
+		<arg name="use_sim_time" value="$(arg use_sim_time)"/>
+		<arg name="headless" value="$(arg headless)"/>
+	</include>
+
+	<!-- Load the URDF into the ROS Parameter Server -->
+	<param name="robot_description" textfile="$(find scara_setup_description)/urdf/scara_setup.urdf"/>
+
+	<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+	<group if="$(arg sim)">
+		<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model scara_setup -param robot_description" />
+	</group>
+
+	<!-- ros_control rrbot launch file -->
+	<group if="$(arg sim)">
+		<include file="$(find scara_setup_control)/launch/scara_setup_control_gazebo.launch.xml" />
+	</group>
+	<group unless="$(arg sim)">
+		<include file="$(find scara_setup_control)/launch/scara_setup_control.launch.xml" />
+	</group>
+
+	<include file="$(find scara_setup_moveit)/launch/move_group.launch" />
+
+	<group unless="$(arg sim)">
+		<node name="rosserial_node" pkg="rosserial_python" type="serial_node.py" respawn="true">
+			<param name="port" value="/dev/ttyACM0"/>
+			<param name="baud" value="115200"/>
+		</node>
+		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py">
+			<param name="port" value="/dev/ttyUSB0"/>
+			<param name="rate" value="250000"/>
+		</node>
+		<node name="scara_setup_gui" pkg="scara_setup_bringup" type="scara_setup_gui.py"/>
+	</group>
+
+</launch>
