@@ -13,10 +13,17 @@
 #include <iostream>
 #include <pcl/filters/passthrough.h>
 //move it
+#include <pcl_capturing/position_request.h>
 
 //global for merged cloud
 pcl::PointCloud<pcl::PointXYZ> cloud_merged;
 int count = 0;
+
+double posX[] = {0, 0, 0, 0};
+double posY[] = {1, 1, 1, 1};
+double posZ[] = {0.6, 0.4, 0.7, 0.5};
+double oriW[] = {1, 1, 1, 1};
+
 class PCL_capturing
 {
 public:
@@ -89,7 +96,7 @@ private:
   ros::NodeHandle n_;
   ros::Publisher pub_;
   ros::Subscriber sub_;
-
+  
   // callback function
   pcl::PointCloud<pcl::PointXYZ> cloud_pass, cloud_tf;
   pcl::PassThrough<pcl::PointXYZ> pass_through_filter;
@@ -105,14 +112,25 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "pointcloud_capturing");
   ros::MultiThreadedSpinner spinner(4); // Use 4 threads
   std::cerr << "start pcl_capturing" << std::endl;
-  for (int i = 1; i < 5; i++)
+  ros::NodeHandle n_;
+  ros::ServiceClient client = n_.serviceClient<pcl_capturing::position_request>("/request_position");
+  pcl_capturing::position_request srv;
+
+  for (int i = 0; i < 4; i++)
   {
   	std::cerr << "Move to goal: " << i << std::endl;
   	// move to goal
-  	sleep(5);
+	srv.request.pose.position.x = posX[i];
+	srv.request.pose.position.y = posY[i];
+	srv.request.pose.position.z = posZ[i];
+	srv.request.pose.orientation.w = oriW[i];
+	if(!client.call(srv)){
+		ROS_INFO("There was some error on the service call");
+	}
+  	sleep(20);
   	//Create an object of class PCL_capturing that will take care of everything
-  	PCL_capturing Object;
-  	spinner.spin();
+  	//PCL_capturing Object;
+  	//spinner.spin();
   }
   while (ros::ok())
 {
