@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "pcl_filtering"
-PROJECT_SPACE_DIR = "/home/ruud/catkin_ws/src/pcl_filtering/devel"
+PROJECT_SPACE_DIR = "/home/ruud/Fontys_SCARA_Arm/src/devel"
 PROJECT_VERSION = "0.0.0"

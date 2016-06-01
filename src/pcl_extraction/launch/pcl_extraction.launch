@@ -1,0 +1,9 @@
+<launch>
+<node 
+	name="pcl_extraction" 
+	pkg="pcl_extraction" 
+	type="pcl_extraction" 
+	output="screen"
+	args="input:=/output_filtered"> 
+</node>
+</launch>

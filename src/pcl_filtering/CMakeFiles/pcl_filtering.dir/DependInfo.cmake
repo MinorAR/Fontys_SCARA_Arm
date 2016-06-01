@@ -4,13 +4,14 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ruud/catkin_ws/src/pcl_filtering/src/pcl_filtering.cpp" "/home/ruud/catkin_ws/src/pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o"
+  "/home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/src/pcl_filtering.cpp" "/home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 SET(CMAKE_TARGET_DEFINITIONS
   "ROSCONSOLE_BACKEND_LOG4CXX"
+  "ROS_BUILD_SHARED_LIBS=1"
   "ROS_PACKAGE_NAME=\"pcl_filtering\""
   )
 

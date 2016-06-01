@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ruud/catkin_ws/src
+CMAKE_SOURCE_DIR = /home/ruud/Fontys_SCARA_Arm/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ruud/catkin_ws/src
+CMAKE_BINARY_DIR = /home/ruud/Fontys_SCARA_Arm/src
 
 # Utility rule file for trajectory_msgs_generate_messages_lisp.
 
@@ -56,10 +56,10 @@ pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build: traje
 .PHONY : pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
 
 pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/clean:
-	cd /home/ruud/catkin_ws/src/pcl_capturing && $(CMAKE_COMMAND) -P CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_capturing && $(CMAKE_COMMAND) -P CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/clean
 
 pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/depend:
-	cd /home/ruud/catkin_ws/src && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/catkin_ws/src /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src /home/ruud/catkin_ws/src/pcl_capturing /home/ruud/catkin_ws/src/pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ruud/Fontys_SCARA_Arm/src && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/Fontys_SCARA_Arm/src /home/ruud/Fontys_SCARA_Arm/src/pcl_capturing /home/ruud/Fontys_SCARA_Arm/src /home/ruud/Fontys_SCARA_Arm/src/pcl_capturing /home/ruud/Fontys_SCARA_Arm/src/pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : pcl_capturing/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/depend
 

@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: scara_setup_moveit
+Description: Description of scara_setup_moveit
+Version: 0.2.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

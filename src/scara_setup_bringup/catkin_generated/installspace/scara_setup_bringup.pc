@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: scara_setup_bringup
+Description: Description of scara_setup_bringup
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

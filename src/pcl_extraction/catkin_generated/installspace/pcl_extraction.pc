@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: pcl_extraction
+Description: Description of pcl_extraction
+Version: 0.0.0
+Cflags: 
+Libs: -L/usr/local/lib 
+Requires: 

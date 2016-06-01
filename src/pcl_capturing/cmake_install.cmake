@@ -1,4 +1,4 @@
-# Install script for directory: /home/ruud/catkin_ws/src/pcl_capturing
+# Install script for directory: /home/ruud/Fontys_SCARA_Arm/src/pcl_capturing
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -33,17 +33,17 @@ IF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 ENDIF(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ruud/catkin_ws/src/pcl_capturing/catkin_generated/installspace/pcl_capturing.pc")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/ruud/Fontys_SCARA_Arm/src/pcl_capturing/catkin_generated/installspace/pcl_capturing.pc")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pcl_capturing/cmake" TYPE FILE FILES
-    "/home/ruud/catkin_ws/src/pcl_capturing/catkin_generated/installspace/pcl_capturingConfig.cmake"
-    "/home/ruud/catkin_ws/src/pcl_capturing/catkin_generated/installspace/pcl_capturingConfig-version.cmake"
+    "/home/ruud/Fontys_SCARA_Arm/src/pcl_capturing/catkin_generated/installspace/pcl_capturingConfig.cmake"
+    "/home/ruud/Fontys_SCARA_Arm/src/pcl_capturing/catkin_generated/installspace/pcl_capturingConfig-version.cmake"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pcl_capturing" TYPE FILE FILES "/home/ruud/catkin_ws/src/pcl_capturing/package.xml")
+  FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/pcl_capturing" TYPE FILE FILES "/home/ruud/Fontys_SCARA_Arm/src/pcl_capturing/package.xml")
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

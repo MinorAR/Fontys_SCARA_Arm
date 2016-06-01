@@ -35,42 +35,42 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ruud/catkin_ws/src/pcl_filtering
+CMAKE_SOURCE_DIR = /home/ruud/Fontys_SCARA_Arm/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ruud/catkin_ws/src/pcl_filtering
+CMAKE_BINARY_DIR = /home/ruud/Fontys_SCARA_Arm/src
 
 # Include any dependencies generated for this target.
-include CMakeFiles/pcl_filtering.dir/depend.make
+include pcl_filtering/CMakeFiles/pcl_filtering.dir/depend.make
 
 # Include the progress variables for this target.
-include CMakeFiles/pcl_filtering.dir/progress.make
+include pcl_filtering/CMakeFiles/pcl_filtering.dir/progress.make
 
 # Include the compile flags for this target's objects.
-include CMakeFiles/pcl_filtering.dir/flags.make
+include pcl_filtering/CMakeFiles/pcl_filtering.dir/flags.make
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o: CMakeFiles/pcl_filtering.dir/flags.make
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o: src/pcl_filtering.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/ruud/catkin_ws/src/pcl_filtering/CMakeFiles $(CMAKE_PROGRESS_1)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o -c /home/ruud/catkin_ws/src/pcl_filtering/src/pcl_filtering.cpp
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o: pcl_filtering/CMakeFiles/pcl_filtering.dir/flags.make
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o: pcl_filtering/src/pcl_filtering.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/ruud/Fontys_SCARA_Arm/src/CMakeFiles $(CMAKE_PROGRESS_1)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o"
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o -c /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/src/pcl_filtering.cpp
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.i: cmake_force
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ruud/catkin_ws/src/pcl_filtering/src/pcl_filtering.cpp > CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.i
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/src/pcl_filtering.cpp > CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.i
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.s: cmake_force
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ruud/catkin_ws/src/pcl_filtering/src/pcl_filtering.cpp -o CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.s
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/src/pcl_filtering.cpp -o CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.s
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires:
-.PHONY : CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires:
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides: CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
-	$(MAKE) -f CMakeFiles/pcl_filtering.dir/build.make CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides.build
-.PHONY : CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides: pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
+	$(MAKE) -f pcl_filtering/CMakeFiles/pcl_filtering.dir/build.make pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides.build
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides
 
-CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides.build: CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o
+pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.provides.build: pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o
 
 # Object files for target pcl_filtering
 pcl_filtering_OBJECTS = \
@@ -79,8 +79,8 @@ pcl_filtering_OBJECTS = \
 # External object files for target pcl_filtering
 pcl_filtering_EXTERNAL_OBJECTS =
 
-devel/lib/pcl_filtering/pcl_filtering: CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o
-devel/lib/pcl_filtering/pcl_filtering: CMakeFiles/pcl_filtering.dir/build.make
+devel/lib/pcl_filtering/pcl_filtering: pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o
+devel/lib/pcl_filtering/pcl_filtering: pcl_filtering/CMakeFiles/pcl_filtering.dir/build.make
 devel/lib/pcl_filtering/pcl_filtering: /opt/ros/indigo/lib/libpcl_ros_filters.so
 devel/lib/pcl_filtering/pcl_filtering: /opt/ros/indigo/lib/libpcl_ros_io.so
 devel/lib/pcl_filtering/pcl_filtering: /opt/ros/indigo/lib/libpcl_ros_tf.so
@@ -148,22 +148,22 @@ devel/lib/pcl_filtering/pcl_filtering: /usr/lib/x86_64-linux-gnu/libboost_system
 devel/lib/pcl_filtering/pcl_filtering: /usr/lib/x86_64-linux-gnu/libboost_thread.so
 devel/lib/pcl_filtering/pcl_filtering: /usr/lib/x86_64-linux-gnu/libpthread.so
 devel/lib/pcl_filtering/pcl_filtering: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
-devel/lib/pcl_filtering/pcl_filtering: CMakeFiles/pcl_filtering.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable devel/lib/pcl_filtering/pcl_filtering"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pcl_filtering.dir/link.txt --verbose=$(VERBOSE)
+devel/lib/pcl_filtering/pcl_filtering: pcl_filtering/CMakeFiles/pcl_filtering.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../devel/lib/pcl_filtering/pcl_filtering"
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pcl_filtering.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/pcl_filtering.dir/build: devel/lib/pcl_filtering/pcl_filtering
-.PHONY : CMakeFiles/pcl_filtering.dir/build
+pcl_filtering/CMakeFiles/pcl_filtering.dir/build: devel/lib/pcl_filtering/pcl_filtering
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/build
 
-CMakeFiles/pcl_filtering.dir/requires: CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
-.PHONY : CMakeFiles/pcl_filtering.dir/requires
+pcl_filtering/CMakeFiles/pcl_filtering.dir/requires: pcl_filtering/CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o.requires
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/requires
 
-CMakeFiles/pcl_filtering.dir/clean:
-	$(CMAKE_COMMAND) -P CMakeFiles/pcl_filtering.dir/cmake_clean.cmake
-.PHONY : CMakeFiles/pcl_filtering.dir/clean
+pcl_filtering/CMakeFiles/pcl_filtering.dir/clean:
+	cd /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering && $(CMAKE_COMMAND) -P CMakeFiles/pcl_filtering.dir/cmake_clean.cmake
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/clean
 
-CMakeFiles/pcl_filtering.dir/depend:
-	cd /home/ruud/catkin_ws/src/pcl_filtering && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/catkin_ws/src/pcl_filtering /home/ruud/catkin_ws/src/pcl_filtering /home/ruud/catkin_ws/src/pcl_filtering /home/ruud/catkin_ws/src/pcl_filtering /home/ruud/catkin_ws/src/pcl_filtering/CMakeFiles/pcl_filtering.dir/DependInfo.cmake --color=$(COLOR)
-.PHONY : CMakeFiles/pcl_filtering.dir/depend
+pcl_filtering/CMakeFiles/pcl_filtering.dir/depend:
+	cd /home/ruud/Fontys_SCARA_Arm/src && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ruud/Fontys_SCARA_Arm/src /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering /home/ruud/Fontys_SCARA_Arm/src /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering /home/ruud/Fontys_SCARA_Arm/src/pcl_filtering/CMakeFiles/pcl_filtering.dir/DependInfo.cmake --color=$(COLOR)
+.PHONY : pcl_filtering/CMakeFiles/pcl_filtering.dir/depend
 

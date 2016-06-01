@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/pcl_filtering.dir/src/pcl_filtering.cpp.o"
-  "devel/lib/pcl_filtering/pcl_filtering.pdb"
-  "devel/lib/pcl_filtering/pcl_filtering"
+  "../devel/lib/pcl_filtering/pcl_filtering.pdb"
+  "../devel/lib/pcl_filtering/pcl_filtering"
 )
 
 # Per-language clean rules from dependency scanning.
