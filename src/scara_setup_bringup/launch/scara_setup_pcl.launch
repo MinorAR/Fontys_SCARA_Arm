@@ -1,6 +1,6 @@
 <launch>
-<arg name="xtion" default="true" doc="enable xtion camera"/>
-<arg name="kinect" default="false" doc="enable kinect 1 camera"/>
+<arg name="xtion" default="false" doc="enable xtion camera"/>
+<arg name="kinect" default="true" doc="enable kinect 1 camera"/>
 <arg name="capturing" default="true" doc="enable pointcloud capturing"/>
 <arg name="filtering" default="true" doc="enable pointcloud filtering"/>
 <arg name="extraction" default="false" doc="enable pointcloud extraction"/>
