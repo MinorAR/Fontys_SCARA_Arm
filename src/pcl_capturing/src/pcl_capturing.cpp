@@ -12,6 +12,7 @@
 #include <pcl/filters/passthrough.h>
 //move it
 #include <pcl_capturing/position_request.h>
+#include <moveit_msgs/MoveGroupActionResult.h>
 
 int main(int argc, char **argv)
 {
@@ -31,15 +32,15 @@ int main(int argc, char **argv)
   ros::Publisher pub_ = n_.advertise<pcl::PointCloud<pcl::PointXYZ> > ("pointcloud_captured", 1, true);
 
   // positions for arm to move to
-  double posX[] = {0, 0, 0, 0};
-  double posY[] = {1, 1, 1, 1};
-  double posZ[] = {0.6, 0.4, 0.7, 0.5};
+  double posX[] = {-0.155, 0, 0, 0};
+  double posY[] = {0.992, 1, 1, 1};
+  double posZ[] = {0.5, 0.5, 0.7, 0.7};
   double oriX[] = {0, 0, 0, 0};
   double oriY[] = {0, 0, 0, 0};
   double oriZ[] = {0, 0, 0, 0};
   double oriW[] = {1, 1, 1, 1};
 
-  // make pointcloud pointer and wait for message on input topic.
+   // make pointcloud pointer and wait for message on input topic.
   sensor_msgs::PointCloud2::ConstPtr input_cloud; 
 
   // init variables
@@ -74,13 +75,15 @@ int main(int argc, char **argv)
 			ROS_INFO("There was some error on the service call");
 			}
 		// sleep /wait to reach position
-  		sleep(20);
+		ros::topic::waitForMessage<moveit_msgs::MoveGroupActionResult>("/move_group/result", ros::Duration(50.0));
+		std::cerr << "Goal Reached: " << i << std::endl;
+  		sleep(7);
+
 		
 		// position reached, capture pointcloud now
 		// wait for input cloud for 5 sec
 		input_cloud = ros::topic::waitForMessage<sensor_msgs::PointCloud2>("input", ros::Duration(5.0));
-		// set now (ros::Time) for transform pointcloud
-		now = ros::Time::now();
+		
 		
     		// convert pointcloud2 to pointxyz
     		//pcl::fromPCLPointCloud2(*input_cloud, *cloud_converted);
@@ -89,15 +92,17 @@ int main(int argc, char **argv)
 		// (rough) pass through filter
     		pass_through_filter.setInputCloud (cloud_converted);
     		pass_through_filter.setFilterFieldName ("x");
-    		pass_through_filter.setFilterLimits (-2,2);
+    		pass_through_filter.setFilterLimits (-1,1);
     		pass_through_filter.setFilterFieldName ("y");
-    		pass_through_filter.setFilterLimits (-2,2);
+    		pass_through_filter.setFilterLimits (-1,1);
     		pass_through_filter.setFilterFieldName ("z");
-    		pass_through_filter.setFilterLimits (0,3);
+    		pass_through_filter.setFilterLimits (-1,1);
    		pass_through_filter.filter (cloud_pass);
-
+		
+		// set now (ros::Time) for transform pointcloud
+		now = ros::Time::now();
 		// wait max 5 sec for transform
-    		listener.waitForTransform("/camera_link", "/world", now, ros::Duration(5.0));
+    		listener.waitForTransform("/world", "/camera_link", now, ros::Duration(5.0));
     		// transform pointcloud
     		pcl_ros::transformPointCloud ("/camera_link", cloud_pass , cloud_tf, listener);
 
@@ -118,7 +123,8 @@ int main(int argc, char **argv)
 	std::cerr << "PCL_capturing Finished" << std::endl;
 	// set finish status to true
   	ros::param::set("pcl_capturing/finished", true);
-	
+        // wait for ros to shutdown this node
+	ros::waitForShutdown();	
   }
 }
 

@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "pclcaptureing_positioning")
+set(pclcaptureing_positioning_MAINTAINER "woutkanters <woutkanters@todo.todo>")
+set(pclcaptureing_positioning_DEPRECATED "")
+set(pclcaptureing_positioning_VERSION "0.0.0")
+set(pclcaptureing_positioning_BUILD_DEPENDS "roscpp" "rospy" "std_msgs")
+set(pclcaptureing_positioning_RUN_DEPENDS "roscpp" "rospy" "std_msgs")
+set(pclcaptureing_positioning_BUILDTOOL_DEPENDS "catkin")

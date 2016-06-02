@@ -5,7 +5,7 @@
 	<arg name="gui" default="true"/>
 	<arg name="headless" default="false"/>
 	<arg name="debug" default="false"/>
-	<arg name="sim" default="true"/>
+	<arg name="sim" default="false"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg sim)">
 		<arg name="debug" value="$(arg debug)" />

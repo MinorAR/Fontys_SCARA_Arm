@@ -1,0 +1,3 @@
+<launch>
+  <node name="pclcaptureing_positioning" pkg="pclcaptureing_positioning" type="pclcaptureing_positioning"/>
+</launch>
