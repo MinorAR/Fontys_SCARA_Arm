@@ -9,8 +9,8 @@
         <param name="/xmin" value="-2"/>
         <param name="/xmax" value="2"/>
         <param name="/ymin" value="0"/>
-        <param name="/ymax" value="2"/>
+        <param name="/ymax" value="3"/>
         <param name="/zmin" value="0"/>
-        <param name="/zmax" value="1"/>
+        <param name="/zmax" value="2"/>
 </node>
 </launch>

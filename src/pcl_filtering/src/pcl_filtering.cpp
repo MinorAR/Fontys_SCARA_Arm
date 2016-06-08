@@ -103,6 +103,7 @@ int main (int argc, char** argv)
   ros::Subscriber sub = nh.subscribe("input", 1, cloud_cb);
   // Create a ROS publisher for the output point cloud
   pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ( "output_filtered", 1, true);
+  std::cerr << "pcl_filtering: finished" << std::endl;
 
   while (ros::ok())
         {
