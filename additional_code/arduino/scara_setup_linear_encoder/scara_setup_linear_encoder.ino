@@ -4,7 +4,6 @@
 #include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
 #include <std_msgs/Empty.h>
-#include <std_msgs/String.h>
 
 #include <Encoder.h>
 
@@ -25,7 +24,7 @@ ros::NodeHandle nh;
 std_msgs::Float32 val_msg;
 ros::Publisher val_pub("/scara_setup/linear_encoder/value", &val_msg);
 
-std_msgs::String val_shoulder_msg;
+std_msgs::Float32 val_shoulder_msg;
 ros::Publisher val_shoulder_pub("/scara_setup/shoulder/value", &val_shoulder_msg);
 
 std_msgs::Float32 val_elbow_msg;
@@ -74,18 +73,16 @@ void setup() {
 
 const unsigned long lt = 50; //desired loop time
 unsigned long tdiff = 0;
-char test_str[10];
+String str;
+int val;
 
 void loop() {
   unsigned long t1 = millis();
 
   Serial2.write("1");
-  String str = Serial2.readStringUntil('\n');
-  //int val = str.toInt();
-  //val_shoulder_msg.data = (float)val;
-  str.trim();
-  str.toCharArray(test_str, 10);
-  val_shoulder_msg.data = test_str;
+  str = Serial2.readStringUntil('\n');
+  val = str.toInt();
+  val_shoulder_msg.data = (float)val;
   val_shoulder_pub.publish(&val_shoulder_msg);
 
   /*Serial2.write("2");
