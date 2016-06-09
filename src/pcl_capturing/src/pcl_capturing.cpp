@@ -34,13 +34,13 @@ int main(int argc, char **argv)
   ros::Publisher pub_ = n_.advertise<pcl::PointCloud<pcl::PointXYZ> > ("pointcloud_captured", 1, true);
 
   // positions for arm to move to
-  double posX[] = {-0.1, 0.155, -0.1, 0.155}; //0.1 = error
-  double posY[] = {0.992, 0.992, 0.992, 0.992};
-  double posZ[] = {0.5, 0.5, 0.7, 0.7};
-  double oriX[] = {0, 0, 0, 0};
-  double oriY[] = {0, 0, 0, 0};
-  double oriZ[] = {0, 0, 0, 0};
-  double oriW[] = {1, 1, 1, 1};
+  const float posX[] = {0.185, -0.185, 0.185, -0.185};
+  const float posY[] = {0.720, 0.720, 0.720, 0.720};
+  const float posZ[] = {0.5, 0.5, 0.7, 0.7};
+  const float oriX[] = {0, 0, 0, 0};
+  const float oriY[] = {0, 0, 0, 0};
+  const float oriZ[] = {0.464, -0.316, 0.464, -0.316};
+  const float oriW[] = {0.886, 0.949, 0.886, 0.949};
 
    // make pointcloud pointer and wait for message on input topic.
   sensor_msgs::PointCloud2::ConstPtr input_cloud; 

@@ -1,0 +1,10 @@
+(cl:defpackage pcl_capturing-srv
+  (:use )
+  (:export
+   "POSITION_REQUEST"
+   "<POSITION_REQUEST-REQUEST>"
+   "POSITION_REQUEST-REQUEST"
+   "<POSITION_REQUEST-RESPONSE>"
+   "POSITION_REQUEST-RESPONSE"
+  ))
+

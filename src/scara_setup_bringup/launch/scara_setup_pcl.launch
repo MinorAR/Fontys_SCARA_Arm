@@ -3,7 +3,7 @@
 <arg name="kinect" default="false" doc="enable kinect 1 camera"/>
 <arg name="capturing" default="true" doc="enable pointcloud capturing"/>
 <arg name="filtering" default="true" doc="enable pointcloud filtering"/>
-<arg name="extraction" default="true" doc="enable pointcloud extraction"/>
+<arg name="extraction" default="false" doc="enable pointcloud extraction"/>
 
 <arg name="gui" default="false" doc="enable gui (e.g. rviz)"/>
 
