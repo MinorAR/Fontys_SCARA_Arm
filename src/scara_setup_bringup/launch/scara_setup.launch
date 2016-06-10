@@ -38,7 +38,7 @@
 			<param name="port" value="/dev/ttyACM0"/>
 			<param name="baud" value="115200"/>
 		</node>
-		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py">
+		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py" respawn="true">
 			<param name="port" value="/dev/ttyUSB0"/>
 			<param name="rate" value="250000"/>
 		</node>
