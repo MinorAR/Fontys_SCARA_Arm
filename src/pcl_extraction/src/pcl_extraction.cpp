@@ -43,13 +43,14 @@ const double Ymax = 0.5;
 const double Zmin = 0.43;
 const double Zmax = 0.8;
 const double Zresolution = 0.03;
-const double Xresolution = 0.02;
-const double WorkspaceDistance = 1;
+const double Xresolution = 0.01;
+const double WorkspaceDistance = 0.9;
 
 ros::Publisher pub;
 ros::Publisher vis_pub;
 ros::Publisher path_pub;
 ros::Publisher display_publisher;
+
 
 void cloud_cb(const pcl::PCLPointCloud2ConstPtr& input)
 {
@@ -228,6 +229,14 @@ void cloud_cb(const pcl::PCLPointCloud2ConstPtr& input)
   std::vector<geometry_msgs::Pose> waypoints;
   moveit_msgs::RobotTrajectory trajectory;
   geometry_msgs::Pose target_pose;
+  group.setPoseReferenceFrame("world");
+  move_group_interface::MoveGroup::Plan plan;
+  group.setGoalPositionTolerance(0.05);
+  //group.setWorkspace( -0.5 , 0 , 0 , 0.5 , 1 , 1 );
+  group.setPlanningTime(20);
+
+
+
 
 
 //group.setworkspace todo
@@ -338,46 +347,48 @@ void cloud_cb(const pcl::PCLPointCloud2ConstPtr& input)
 		target_pose.position.y = WorkspaceDistance;
 
 	arrow.pose.position.z = target_pose.position.z = PathArrow[i].position.z;
-		
-
 	// Orientation
-/*
-	arrow.pose.orientation.x = target_pose.orientation.x = PathArrow[i].orientation.x;
-	arrow.pose.orientation.y = target_pose.orientation.y = PathArrow[i].orientation.y;
-	arrow.pose.orientation.z = target_pose.orientation.z = PathArrow[i].orientation.z;
-	arrow.pose.orientation.w = target_pose.orientation.w = PathArrow[i].orientation.w;
-*/
-// /*
 	arrow.pose.orientation.x = PathArrow[i].orientation.x;
 	arrow.pose.orientation.y = PathArrow[i].orientation.y;
 	arrow.pose.orientation.z = PathArrow[i].orientation.z;
 	arrow.pose.orientation.w = PathArrow[i].orientation.w;
-	
-	target_pose.orientation.w = 1;
+/*
+	target_pose.orientation.x = PathArrow[i].orientation.x;
+	target_pose.orientation.y = PathArrow[i].orientation.y;
+	target_pose.orientation.z = PathArrow[i].orientation.z;
+	target_pose.orientation.w = PathArrow[i].orientation.w;
+*/
+// temp orientation straight forward, because other position robot cannot reach
+
 	target_pose.orientation.x = 0;
 	target_pose.orientation.y = 0;
 	target_pose.orientation.z = 0;
-// */
+	target_pose.orientation.w = 1;
+
 	std::cerr << "arrow: " << arrow << std::endl; 
 	std::cerr << "target_pose: " << target_pose << std::endl; 	
 	path_pub.publish( arrow );
-	waypoints.push_back(target_pose);
+	waypoints.push_back( target_pose );
   }
 
-
   double fraction = group.computeCartesianPath(waypoints,
-                                             0.01,  // eef_step
+                                             0.01,  // eef_step0.01
                                              0.0,   // jump_threshold
-                                             trajectory, //trajectory
-					     true); // collision avoiding true -> test
+                                             trajectory //trajectory
+					     ); 
 
   ROS_INFO("Visualizing plan (cartesian path) (%.2f%% acheived)", fraction * 100.0);
   /* Sleep to give Rviz time to visualize the plan. */
   sleep(15.0);
 
   //move the arm
+  //group.move();
+
+
+  // Finally plan and execute the trajectory
+  plan.trajectory_ = trajectory;
+  group.execute(plan);
   
-  group.move();
 
   std::cerr << "pcl_extraction: finished" << std::endl;  
 
@@ -400,7 +411,7 @@ int main (int argc, char** argv)
   ros::Subscriber sub = nh.subscribe("input", 1, cloud_cb);
 
   // Create a ROS publisher for the output point cloud
-  pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ( "output_extraction", 1, true);
+  //pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ> > ( "output_extraction", 1, true);
 
   // Create visual publisher
   vis_pub = nh.advertise<visualization_msgs::Marker>( "visualization_marker", 0 , true);
@@ -408,6 +419,7 @@ int main (int argc, char** argv)
   path_pub = nh.advertise<visualization_msgs::Marker>( "visualization_path_marker", 0 , true);
   // path publisher
   display_publisher = nh.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
+  
  
  while (ros::ok())
         {

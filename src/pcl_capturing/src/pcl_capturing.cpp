@@ -34,8 +34,8 @@ int main(int argc, char **argv)
   ros::Publisher pub_ = n_.advertise<pcl::PointCloud<pcl::PointXYZ> > ("pointcloud_captured", 1, true);
 
   // positions for arm to move to
-  const float posX[] = {0.185, -0.185, 0.185, -0.185};
-  const float posY[] = {0.720, 0.720, 0.720, 0.720};
+  const float posX[] = {0.445, -0.445, 0.445, -0.445};
+  const float posY[] = {0.623, 0.623, 0.623, 0.623};
   const float posZ[] = {0.5, 0.5, 0.7, 0.7};
   const float oriX[] = {0, 0, 0, 0};
   const float oriY[] = {0, 0, 0, 0};
@@ -56,6 +56,47 @@ int main(int argc, char **argv)
   ros::Time now = ros::Time::now();
   // transform object
   tf::TransformListener listener;
+
+  // add collision object
+
+  // collision object publisher
+  ros::Publisher object_pub = n_.advertise<moveit_msgs::CollisionObject>("/collision_object",10);
+
+  ros::Duration(0.5).sleep();
+  moveit_msgs::CollisionObject object;
+  geometry_msgs::Pose object_pose;
+  object_pose.position.x = 0;
+  object_pose.position.y = 1.9;
+  object_pose.position.z = 0.5;
+  object_pose.orientation.w = 1;
+  object_pose.orientation.x = 0;
+  object_pose.orientation.y = 0;
+  object_pose.orientation.z = 0;
+  shape_msgs::SolidPrimitive shape;
+  shape.type = shape.BOX;
+  shape.dimensions.push_back(0.6); //x dimension
+  shape.dimensions.push_back(0.4); //y dimension
+  shape.dimensions.push_back(1); //z dimension
+  object.header.frame_id = "/world";
+  object.header.stamp = ros::Time::now();
+  object.primitives.push_back(shape);             //shape is of type shape_msgs::SolidPrimitive
+  object.primitive_poses.push_back(object_pose);  //object_pose is of type geometry_msgs::Pose
+  object.operation = object.ADD;
+  object.id = "object1";
+  object_pub.publish(object);
+
+//Sleep to make sure the object is received within the MoveGroup node
+ros::Duration(0.5).sleep();
+
+//Attach the object
+ros::Publisher aco_pub = n_.advertise<moveit_msgs::AttachedCollisionObject>("/attached_collision_object",10);
+ros::Duration(0.5).sleep();
+moveit_msgs::AttachedCollisionObject aco;
+aco.object.id = object.id;
+aco.link_name = "link_eef";
+aco.touch_links.push_back(aco.link_name);
+aco.object.operation = moveit_msgs::CollisionObject::ADD;
+aco_pub.publish(aco);
   
   // delay for starting up move node etc.
   sleep(10);

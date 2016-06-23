@@ -38,11 +38,13 @@
 			<param name="port" value="/dev/ttyACM0"/>
 			<param name="baud" value="115200"/>
 		</node>
-		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py">
+		<node name="full_hw_controller" pkg="scara_setup_dynamixel" type="full_controller.py" respawn="true">
 			<param name="port" value="/dev/ttyUSB0"/>
 			<param name="rate" value="250000"/>
 		</node>
 		<node name="scara_setup_gui" pkg="scara_setup_bringup" type="scara_setup_gui.py"/>
 	</group>
+
+	<node pkg="rviz" type="rviz" output="screen" name="rviz" respawn="true"/>
 
 </launch>
