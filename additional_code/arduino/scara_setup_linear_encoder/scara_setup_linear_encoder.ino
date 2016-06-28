@@ -91,11 +91,11 @@ void loop() {
   val_elbow_msg.data = val;
   val_elbow_pub.publish(&val_elbow_msg);*/
 
-  /*Serial2.write("3");
+  Serial2.write("3");
   str = Serial2.readStringUntil('\n');
   val = str.toInt();
   val_wrist_msg.data = val;
-  val_wrist_pub.publish(&val_wrist_msg);*/
+  val_wrist_pub.publish(&val_wrist_msg);
 
   load_msg.data = (tdiff * 100.0) / lt;
   //load_msg.data = tdiff;

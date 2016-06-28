@@ -3,6 +3,7 @@
 import rospy
 
 from std_msgs.msg import Float64
+from std_msgs.msg import Float32
 from std_msgs.msg import Bool
 from std_msgs.msg import Empty
 from dxl.dxlchain import DxlChain
@@ -16,6 +17,9 @@ class HWCoupling:
 		self.upper_limit = False
 		self.calibrated = False
 		
+		self.shoulder_state = 0.0
+		self.wrist_state = 0.0
+		
 		self.chain = DxlChain(rospy.get_param('~port'), rate=rospy.get_param('~rate'))
 		
 		self.motors = self.chain.get_motor_list()
@@ -27,12 +31,14 @@ class HWCoupling:
 	
 		self.shoulder_pub = rospy.Publisher("/full_hw_controller/shoulder/state", Float64, queue_size=10)
 		rospy.Subscriber("/full_hw_controller/shoulder/command", Float64, self.callback_shoulder)
+		rospy.Subscriber("/scara_setup/shoulder/value", Float32, self.callback_shoulder_encoder)
 	
 		self.elbow_pub = rospy.Publisher("/full_hw_controller/elbow/state", Float64, queue_size=10)
 		rospy.Subscriber("/full_hw_controller/elbow/command", Float64, self.callback_elbow)
 	
 		self.wrist_pub = rospy.Publisher("/full_hw_controller/wrist/state", Float64, queue_size=10)
 		rospy.Subscriber("/full_hw_controller/wrist/command", Float64, self.callback_wrist)
+		rospy.Subscriber("/scara_setup/wrist/value", Float32, self.callback_wrist_encoder)
 	
 		self.fingerjoint_pub = rospy.Publisher("/full_hw_controller/fingerjoint/state", Float64, queue_size=10)
 		rospy.Subscriber("/full_hw_controller/fingerjoint/command", Float64, self.callback_fingerjoint)
@@ -147,10 +153,26 @@ class HWCoupling:
 			self.chain.set_reg(1, "moving_speed", 0)
 	
 	def callback_shoulder(self, data):
-		command = 2048 + round(data.data / 0.001533203)
+		#command = 2048 + round(data.data / 0.001533203)
 		#chain.goto(2, command, speed=0, blocking=False)
+		#if self.excitation:
+		#	self.chain.set_reg(2, "goal_pos", command)
+		command = abs(round(data.data * 538))
+	
+		#if command > 5:
+		#	command = command + 80
+	
+		if command > 1023: 
+			command = 1023
+	
+		if data.data < 0:
+			command = command + 1024
+
 		if self.excitation:
-			self.chain.set_reg(2, "goal_pos", command)
+			self.chain.set_reg(2, "moving_speed", command)
+			
+	def callback_shoulder_encoder(self, data):
+		self.shoulder_state = (data.data - 2048) * 0.001533203
 	
 	def callback_elbow(self, data):
 		command = 2048 + round(data.data / 0.001533203)
@@ -159,10 +181,26 @@ class HWCoupling:
 			self.chain.set_reg(3, "goal_pos", command)
 	
 	def callback_wrist(self, data):
-		command = 2048 + round(data.data / 0.001533203)
+		#command = 2048 + round(data.data / 0.001533203)
 		#chain.goto(4, command, speed=0, blocking=False)
+		#if self.excitation:
+		#	self.chain.set_reg(4, "goal_pos", command)
+		command = abs(round(-data.data * 538))
+	
+		#if command > 5:
+		#	command = command + 80
+	
+		if command > 1023: 
+			command = 1023
+	
+		if -data.data < 0:
+			command = command + 1024
+
 		if self.excitation:
-			self.chain.set_reg(4, "goal_pos", command)
+			self.chain.set_reg(4, "moving_speed", command)
+			
+	def callback_wrist_encoder(self, data):
+		self.wrist_state = (data.data - 2048) * 0.001533203
 	
 	def callback_fingerjoint(self, data):
 		command = 512 + round(data.data / 0.005117188)
@@ -172,14 +210,16 @@ class HWCoupling:
 			
 	def loop(self):
 		while not rospy.is_shutdown():
-			rawval = (self.chain.get_reg(2, "present_position") - 2048) * 0.001533203
-			self.shoulder_pub.publish(Float64(rawval))
+			#rawval = (self.chain.get_reg(2, "present_position") - 2048) * 0.001533203
+			#self.shoulder_pub.publish(Float64(rawval))
+			self.shoulder_pub.publish(Float64(self.shoulder_state))
 		
 			rawval = (self.chain.get_reg(3, "present_position") - 2048) * 0.001533203
 			self.elbow_pub.publish(Float64(rawval))
 		
-			rawval = (self.chain.get_reg(4, "present_position") - 2048) * 0.001533203
-			self.wrist_pub.publish(Float64(rawval))
+			#rawval = (self.chain.get_reg(4, "present_position") - 2048) * 0.001533203
+			#self.wrist_pub.publish(Float64(rawval))
+			self.wrist_pub.publish(Float64(self.wrist_state))
 		
 			rawval = (self.chain.get_reg(5, "present_position") - 512) * 0.005117188
 			self.fingerjoint_pub.publish(Float64(rawval))

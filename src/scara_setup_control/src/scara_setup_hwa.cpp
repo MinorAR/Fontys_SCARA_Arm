@@ -3,9 +3,9 @@
 scara_setup::ScaraSetupHWA::ScaraSetupHWA()
 {
 	trans[0] = 1.0; //linear, no transmission, this is handled by the velocity control loop
-   trans[1] = 2.0; //shoulder
+   trans[1] = 1.0; //shoulder
    trans[2] = -2.0; //elbow
-   trans[3] = -2.0; //<- third joint is the wrist
+   trans[3] = -1.0; //<- third joint is the wrist
    trans[4] = -1.0; //fingerjoint	
    
    reset_switch = false;
@@ -131,7 +131,7 @@ void scara_setup::ScaraSetupHWA::write()
 	linear_cmd_pub.publish(msg);
 	
 	act_cmd[1] = jnt_cmd[1] * trans[1];
-	msg.data = act_cmd[1];
+	msg.data = act_cmd[1] - jnt_pos[1];
 	shoulder_cmd_pub.publish(msg);
 	
 	act_cmd[2] = jnt_cmd[2] * trans[2];
@@ -139,7 +139,7 @@ void scara_setup::ScaraSetupHWA::write()
 	elbow_cmd_pub.publish(msg);
 	
 	act_cmd[3] = jnt_cmd[3] * trans[3];
-	msg.data = act_cmd[3];
+	msg.data = act_cmd[3] - jnt_pos[3];
 	wrist_cmd_pub.publish(msg);
 	
 	act_cmd[4] = jnt_cmd[4] * trans[4];
