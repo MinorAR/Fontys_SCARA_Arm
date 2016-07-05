@@ -14,8 +14,10 @@ You can see that the node sends an acknowlage back to the terminal.
 ## Folder contents
 This is a catkin created package so the folders and most documents are automatically generated. also see: http://wiki.ros.org/catkin/Tutorials/create_a_workspace 
 
-In the [src folder](http://github.com) I created a C++ node for the service call.
+In the [src folder](https://github.com/MinorAR/Fontys_SCARA_Arm/tree/master/src/pclcaptureing_positioning/src) I created a C++ node for the service call.
 
-In the Launch folder I created a launch file to automatically launch all vital pats of the node.
+In the [Launch folder](https://github.com/MinorAR/Fontys_SCARA_Arm/tree/master/src/pclcaptureing_positioning/launch) I created a launch file to automatically launch all vital pats of the node.
+
+In the [srv folder](https://github.com/MinorAR/Fontys_SCARA_Arm/tree/master/src/pclcaptureing_positioning/srv) I added a service file which includes the information about how to service is build. In my case I used the /pose topic.
 
 In this folder you can find the Cmakelist which is ajusted to compile all the parts of this folder correct.
