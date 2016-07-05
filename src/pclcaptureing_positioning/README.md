@@ -1,4 +1,4 @@
-Service node for moveIt!
+# Service node for moveIt!
 
 In this document you will find information about how to create a node that offers a service in ROS. This service allows you to request a position that will be sent to a moveIt movegroup.
 
