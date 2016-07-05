@@ -14,7 +14,7 @@ You can see that the node sends an acknowlage back to the terminal.
 ## Folder contents
 This is a catkin created package so the folders and most documents are automatically generated. also see: http://wiki.ros.org/catkin/Tutorials/create_a_workspace 
 
-In the src folder I created a C++ node for the service call.
+In the [src folder](http://github.com) I created a C++ node for the service call.
 
 In the Launch folder I created a launch file to automatically launch all vital pats of the node.
 
