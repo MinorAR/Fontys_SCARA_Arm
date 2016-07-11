@@ -30,14 +30,16 @@ class HWCoupling:
 		rospy.Subscriber("/full_hw_controller/linear/override", Float64, self.callback_linear_override)
 	
 		self.shoulder_pub = rospy.Publisher("/full_hw_controller/shoulder/state", Float64, queue_size=10)
-		rospy.Subscriber("/full_hw_controller/shoulder/command", Float64, self.callback_shoulder)
+		rospy.Subscriber("/full_hw_controller/shoulder/vel_command", Float64, self.callback_shoulder)
+		self.shoulder_vel_pub = rospy.Publisher("/full_hw_controller/shoulder/vel_state", Float64, queue_size=10)
 		rospy.Subscriber("/scara_setup/shoulder/value", Float32, self.callback_shoulder_encoder)
 	
 		self.elbow_pub = rospy.Publisher("/full_hw_controller/elbow/state", Float64, queue_size=10)
 		rospy.Subscriber("/full_hw_controller/elbow/command", Float64, self.callback_elbow)
 	
 		self.wrist_pub = rospy.Publisher("/full_hw_controller/wrist/state", Float64, queue_size=10)
-		rospy.Subscriber("/full_hw_controller/wrist/command", Float64, self.callback_wrist)
+		rospy.Subscriber("/full_hw_controller/wrist/vel_command", Float64, self.callback_wrist)
+		self.wrist_vel_pub = rospy.Publisher("/full_hw_controller/wrist/vel_state", Float64, queue_size=10)
 		rospy.Subscriber("/scara_setup/wrist/value", Float32, self.callback_wrist_encoder)
 	
 		self.fingerjoint_pub = rospy.Publisher("/full_hw_controller/fingerjoint/state", Float64, queue_size=10)
@@ -157,7 +159,7 @@ class HWCoupling:
 		#chain.goto(2, command, speed=0, blocking=False)
 		#if self.excitation:
 		#	self.chain.set_reg(2, "goal_pos", command)
-		command = abs(round(data.data * 538))
+		command = abs(round(-data.data / 0.0119))
 	
 		#if command > 5:
 		#	command = command + 80
@@ -185,7 +187,7 @@ class HWCoupling:
 		#chain.goto(4, command, speed=0, blocking=False)
 		#if self.excitation:
 		#	self.chain.set_reg(4, "goal_pos", command)
-		command = abs(round(-data.data * 538))
+		command = abs(round(-data.data / 0.0119))
 	
 		#if command > 5:
 		#	command = command + 80
@@ -210,15 +212,23 @@ class HWCoupling:
 			
 	def loop(self):
 		while not rospy.is_shutdown():
-			#rawval = (self.chain.get_reg(2, "present_position") - 2048) * 0.001533203
-			#self.shoulder_pub.publish(Float64(rawval))
+			rawval = self.chain.get_reg(2, "present_speed")
+			if rawval >= 1023:
+				rawval = (rawval - 1023) * 0.0119
+			else:
+				rawval = rawval * -0.0119
+			self.shoulder_vel_pub.publish(Float64(rawval))
 			self.shoulder_pub.publish(Float64(self.shoulder_state))
 		
 			rawval = (self.chain.get_reg(3, "present_position") - 2048) * 0.001533203
 			self.elbow_pub.publish(Float64(rawval))
 		
-			#rawval = (self.chain.get_reg(4, "present_position") - 2048) * 0.001533203
-			#self.wrist_pub.publish(Float64(rawval))
+			rawval = self.chain.get_reg(4, "present_speed")
+			if rawval >= 1023:
+				rawval = (rawval - 1023) * 0.0119
+			else:
+				rawval = rawval * -0.0119
+			self.wrist_vel_pub.publish(Float64(rawval))
 			self.wrist_pub.publish(Float64(self.wrist_state))
 		
 			rawval = (self.chain.get_reg(5, "present_position") - 512) * 0.005117188

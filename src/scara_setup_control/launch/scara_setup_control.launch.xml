@@ -17,5 +17,38 @@
     respawn="false" output="screen">
     <remap from="/joint_states" to="/scara_setup/joint_states" />
   </node>
+  
+  <!-- start local PID loops -->
+	<node name="pid_shoulder" pkg="pid" type="controller" ns="local_pid_shoulder">
+		<param name="node_name" value="pid_shoulder" />
+		<param name="Kp" value="0.2" />
+		<param name="Ki" value="0.00" />
+		<param name="Kd" value="0.01" />
+		<param name="upper_limit" value="12.212" />
+		<param name="lower_limit" value="-12.212" />
+		<param name="windup_limit" value="12.212" />
+		<param name="diagnostic_period" value="0.25" />
+		<param name="max_loop_frequency" value="50.0" />
+		<param name="min_loop_frequency" value="50.0" />
+		<remap from="setpoint" to="/full_hw_controller/shoulder/command" />
+		<remap from="state" to="/full_hw_controller/shoulder/vel_state" />
+		<remap from="control_effort" to="/full_hw_controller/shoulder/vel_command" />
+	</node>
+
+	<node name="pid_wrist" pkg="pid" type="controller" ns="local_pid_wrist" output="screen" >
+		<param name="node_name" value="pid_wrist" />
+		<param name="Kp" value="0.2" />
+		<param name="Ki" value="0.00" />
+		<param name="Kd" value="0.01" />
+		<param name="upper_limit" value="12.212" />
+		<param name="lower_limit" value="-12.212" />
+		<param name="windup_limit" value="12.212" />
+		<param name="diagnostic_period" value="0.25" />
+		<param name="max_loop_frequency" value="50.0" />
+		<param name="min_loop_frequency" value="50.0" />
+		<remap from="setpoint" to="/full_hw_controller/wrist/command" />
+		<remap from="state" to="/full_hw_controller/wrist/vel_state" />
+		<remap from="control_effort" to="/full_hw_controller/wrist/vel_command" />
+	</node>
 
 </launch>

@@ -13,6 +13,7 @@ class RosPublisher:
 		rospy.init_node('scara_setup_gui', anonymous=False)
 		self.pub_excitation = rospy.Publisher('/full_hw_controller/set_excitation', Bool, queue_size=100)
 		self.pub_reset_pos = rospy.Publisher('/scara_setup/reset_positions', Empty, queue_size=100)
+		self.pub_enable_pid = rospy.Publisher('/local_pid/enable', Bool, queue_size=100)
 		self.pub_z_override = rospy.Publisher('/full_hw_controller/linear/override', Float64, queue_size=100)
 		self.pub_reset_enc = rospy.Publisher('/scara_setup/linear_encoder/reset', Empty, queue_size=100)
 		self.pub_cog = rospy.Publisher('/full_hw_controller/cog_linear', Empty, queue_size=100)
@@ -73,6 +74,7 @@ class RosPublisher:
 	#Button callbacks		
 	def setPlanned(self):
 		self.pub_reset_pos.publish(Empty())
+		self.pub_enable_pid.publish(Bool(True))
 		self.pub_excitation.publish(Bool(True))
 		
 		self.but_planned['state'] = 'disabled'
@@ -84,6 +86,7 @@ class RosPublisher:
 	
 	def setManual(self):
 		self.pub_excitation.publish(Bool(False))
+		self.pub_enable_pid.publish(Bool(False))
 		
 		self.but_planned['state'] = 'normal'
 		self.but_up['state'] = 'normal'

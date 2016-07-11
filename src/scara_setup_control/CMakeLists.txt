@@ -4,7 +4,7 @@ project(scara_setup_control)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_controllers dynamixel_msgs std_msgs)
+find_package(catkin REQUIRED controller_manager robot_state_publisher dynamixel_controllers dynamixel_msgs std_msgs pid)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
